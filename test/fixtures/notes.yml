@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 1
+  date: 2023-03-09
+  title: MyString
+  description: MyString
+
+two:
+  patient_id: 1
+  date: 2023-03-09
+  title: MyString
+  description: MyString

@@ -1,0 +1,2 @@
+class ArmGroupsController < ApplicationController
+end

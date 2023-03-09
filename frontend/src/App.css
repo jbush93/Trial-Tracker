@@ -1,0 +1,297 @@
+.App {
+  width: 100%;
+  height: 100vh;
+
+}
+
+body {
+  margin: 0px;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  /* width: 100%;
+  height: 100%; */
+  /* margin-top: 10px; */
+  /* justify-content: center; */
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.sidebar {
+  /* top: 0; */
+  height: 100vh;
+  width: 250px;
+  /* background-color: #644e5b; */
+  /* background-color: #cfaaf0; */
+  background-color: #0b0C10;
+  display: flex;
+  position: fixed;
+  border-radius: 0px 15px 15px 0px;
+  /* box-shadow: 3px 5px 5px #45A29E; */
+  border-right: 3px solid #45A29E;
+}
+
+.sidebarlist {
+  height: auto;
+  width: 100%;
+  padding: 0;
+}
+
+.sidebarlist .row {
+  width: 100%;
+  height: 50px;
+  /* border: 1px solid white; */
+  list-style-type: none;
+  margin: 0%;
+  display: flex;
+  flex-direction: row;
+  color: #45A29E;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /* text-transform: uppercase; */
+}
+
+.logout {
+  color: white;
+  width: 250px;
+  height: 50px;
+  /* border: 1px solid white; */
+  list-style-type: none;
+  margin: 0%;
+  display: flex;
+  flex-direction: row;
+  color: #45A29E;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  /* left: 10px; */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding: 0;
+}
+
+.logout button {
+  background-color: #0b0C10;
+  color: white;
+  border-color: #45A29E;
+  border-style: solid;
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.logout button:active {
+  background-color: #45A29E;
+  color: white;
+  box-shadow: inset 0 3px 5px #0b0C10;
+}
+
+a:hover {
+  text-decoration: none;
+  /* color: black; */
+}
+
+.sidebarlist .row:hover {
+  cursor: pointer;
+  /* background-color: #293846; */
+  /* background-color: #ec7171; */
+  background-color: #45A29E;
+  color: black;
+}
+
+.sidebarlist .row:active {
+  box-shadow: inset 5px 0px 5px #0b0C10;
+}
+
+.sidebarlist #active {
+  /* background-color: #293846; */
+}
+
+.row #icon {
+  flex: 30%;
+  display: grid;
+  place-items: center;
+}
+
+.row #title {
+  flex: 70%;
+}
+
+.header {
+  background-color: #293846;
+  color: white;
+  height: 3vh;
+  /* width: 250px; */
+  /* position: absolute; */
+  /* display: flex; */
+  text-align: center;
+  font-size: large;
+}
+
+.home {
+  display: flex;
+  margin-left: 250px;
+  min-height: 96vh;
+  display: flex;
+  margin-left: 250px;
+  background: pink;
+  width: 82vw;
+  padding: 0.5em;
+  /* margin: 25vh auto 0; */
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.homeItem {
+  background: lightblue;
+  margin: 0.5em;
+  width: 100%;
+  text-align: center;
+}
+
+.database {
+  display: flex;
+  margin-left: 250px;
+}
+
+.myaccount {
+  display: flex;
+  margin-left: 250px;
+}
+
+.trialsContainer {
+  display: flex;
+  margin-left: 250px;
+  background: pink;
+  height: 98%;
+  width: 81vw;
+  padding: 0.5em;
+  /* margin: 25vh auto 0; */
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.trialsCard {
+  background: lightblue;
+  margin: 0.5em;
+  width: 100%;
+}
+
+.trialPage {
+  margin-left: 250px;
+}
+
+.patientsContainer {
+  margin-left: 250px;
+  background: pink;
+  height: 100%;
+  width: 81vw;
+  padding: 0.5em;
+  /* margin: 25vh auto 0; */
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.patientsCard {
+  background: lightblue;
+  margin: 0.5em;
+  width: 35vw;
+  border-radius: 10px;
+}
+
+.patientCardStorage {
+  background-color: aquamarine;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* margin: auto; */
+}
+
+.patientPage {
+  margin-left: 250px;
+}
+
+.patientsButtons {
+  height: 10vh;
+  background-color: aqua;
+  justify-content: center;
+  text-align: center;
+}
+
+.dashboard {
+  margin-left: 250px;
+  background: pink;
+  height: 97vh;
+  width: 82vw;
+  padding: 0.5em;
+  /* margin: 25vh auto 0; */
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.dashboard-item {
+  background: lightblue;
+  margin: 0.5em;
+  height: 45%;
+  width: 45%;
+  border-radius: 10px 10px 10px 10px;
+  border-style: outset;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-div {
+  height: 25vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-title {
+  text-align: center;
+}
+
+.notesContainer {
+  margin-left: 250px;
+  background: pink;
+  height: 97vh;
+  width: 82vw;
+  padding: 0.5em;
+  /* margin: 25vh auto 0; */
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
