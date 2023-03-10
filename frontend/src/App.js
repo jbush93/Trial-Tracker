@@ -19,6 +19,7 @@ import NotesContainer from './components/NotesContainer';
 import CreateTrial from './components/CreateTrial';
 import CreatePatient from './components/CreatePatient';
 import CreateNote from './components/CreateNote';
+import TrialsChart from './components/TrialsChart';
 
 function App()
 {
@@ -27,6 +28,8 @@ function App()
   const [loggedIn, setLoggedIn] = useState(true)
   const [trialId, setTrialId] = useState()
   const [patientId, setPatientId] = useState()
+  const [notes, setNotes] = useState([])
+  const [newNote, setNewNote] = useState([])
 
   useEffect(function ()
   {
@@ -60,7 +63,7 @@ function App()
             </Route> */}
 
             <Route path='/dashboard'>
-              <Dashboard />
+              <Dashboard trials={trials} />
             </Route>
 
             <Route path='/trials/create'>
@@ -68,7 +71,7 @@ function App()
             </Route>
 
             <Route path='/trials/:id'>
-              <TrialPage trialId={trialId} />
+              <TrialPage trialId={trialId} setPatientId={setPatientId} />
             </Route>
 
             <Route path='/trials'>
@@ -80,7 +83,7 @@ function App()
             </Route>
 
             <Route path='/patients/:id'>
-              <PatientPage patientId={patientId} />
+              <PatientPage patientId={patientId} newNote={newNote} setTrialId={setTrialId} />
             </Route>
 
             <Route path='/patients'>
@@ -88,15 +91,15 @@ function App()
             </Route>
 
             <Route path='/notes/create'>
-              <CreateNote />
+              <CreateNote patientId={patientId} setNewNote={setNewNote} />
             </Route>
 
-            <Route path='/notes/:id'>
+            {/* <Route path='/notes/:id'>
               <PatientPage />
-            </Route>
+            </Route> */}
 
             <Route path='/notes'>
-              <NotesContainer />
+              <NotesContainer setNotes={setNotes} newNote={newNote} />
             </Route>
 
             <Route path='/myaccount'>

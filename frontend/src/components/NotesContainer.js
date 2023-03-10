@@ -1,17 +1,9 @@
 import React, { Component, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
 
-function NotesContainer({ })
+
+function NotesContainer({ setNotes })
 {
 
-
-    let history = useHistory();
-    function handleClick(e)
-    {
-        // console.log(e.target.name)
-        history.push(`/notes/create`);
-    }
-    const [notes, setNotes] = useState([])
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
 
@@ -67,7 +59,7 @@ function NotesContainer({ })
     return (
         <div className='notesContainer'>
             <div>
-                <p>search / filter / <button onClick={handleClick}>create new</button></p>
+                <p>search / filter /</p>
             </div>
             <div>
                 {/* {mappedTrials} */}

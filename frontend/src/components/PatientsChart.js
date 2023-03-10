@@ -54,12 +54,12 @@ function PatientsChart()
             width={450}
             height={275}
             data={data}
-        // margin={{
-        //     top: 5,
-        //     right: 30,
-        //     left: 30,
-        //     bottom: 5,
-        // }}
+            margin={{
+                top: 5,
+                right: 5,
+                left: 30,
+                bottom: 5,
+            }}
         >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />

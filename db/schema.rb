@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_154347) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_065743) do
   create_table "arm_groups", force: :cascade do |t|
     t.integer "trial_id"
     t.string "label"
@@ -37,6 +37,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_154347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "city"
+  end
+
+  create_table "measurements", force: :cascade do |t|
+    t.integer "patient_id"
+    t.date "date"
+    t.integer "measurement"
+    t.string "measurement_label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|

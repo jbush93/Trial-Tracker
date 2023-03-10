@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :measurements
   resources :notes
   resources :outcomes
   resources :trials
