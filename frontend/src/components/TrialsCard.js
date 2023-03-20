@@ -19,7 +19,7 @@ function TrialsCard({ trial, setTrialId })
             <Card style={{ height: "30vh" }}>
                 <Card.Header className="d-flex justify-content-between align-items-center">
                     <h5>Trial {id} - {brief_title}</h5>
-                    <Button variant="primary" name="trials" onClick={handleClick}>View Details</Button>
+                    <Button variant="primary" name="trials" onClick={handleClick}>View Details</Button >
                 </Card.Header>
                 <Card.Body>
                     <p>Trial: {NCTId}</p>
@@ -28,7 +28,7 @@ function TrialsCard({ trial, setTrialId })
                     <p>Status: {overall_status}</p>
                 </Card.Body>
             </Card>
-        </div>
+        </div >
     )
 }
 

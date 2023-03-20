@@ -2,12 +2,17 @@ import React, { Component, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import FileUploadForm from './FileUploadForm';
+import PdfViewer from './PdfViewer';
 
 function PatientPage({ patientId, newNote, setTrialId })
 {
+    console.log(patientId)
     const [info, setInfo] = useState(null);
     const [newMeasurement, setNewMeasurement] = useState([])
     const [currentChartMeasurement, setCurrentChartMeasurement] = useState('')
+    const [patient, setPatient] = useState([])
+    const [pdfUrl, setPdfUrl] = useState('')
 
     let history = useHistory();
     function handleClick(e)
@@ -22,8 +27,15 @@ function PatientPage({ patientId, newNote, setTrialId })
         console.log(e.target.value)
     }
 
+    const [imageUrl, setImageUrl] = useState(null);
 
-    const [patient, setPatient] = useState([])
+    function handleFileUpload(url)
+    {
+        setImageUrl(url);
+    }
+
+
+
     useEffect(function ()
     {
         fetch(`http://localhost:3000/patients/${patientId}`)
@@ -36,7 +48,7 @@ function PatientPage({ patientId, newNote, setTrialId })
                 console.log(data)
                 return setPatient(data)
             })
-    }, [newNote, newMeasurement])
+    }, [newNote, newMeasurement, imageUrl, pdfUrl])
 
     const initialState = {
         patient_id: patientId,
@@ -68,16 +80,19 @@ function PatientPage({ patientId, newNote, setTrialId })
             .then(data => setNewMeasurement(data))
     }
 
-    const { id, first_name, last_name, address, gender, height, weight, trial, trial_id, notes, conditions, measurements } = patient
+    const { id, first_name, last_name, address, gender, height, weight, trial, trial_id, notes, conditions, measurements, documents } = patient
 
     function handleTrialClick()
     {
+        setTrialId(trial_id)
         history.push(`/trials/${trial_id}`);
+        // console.log(trial_id)
     }
     const mappedNotes = notes ? notes.map(function (note)
     {
         return <tr>
             <td>{note.date}</td>
+            <td>{note.title}</td>
             <td>{note.description}</td>
         </tr>;
     }) : "";
@@ -104,10 +119,6 @@ function PatientPage({ patientId, newNote, setTrialId })
             .map((measurement) => ({ date: measurement.date, measurement: measurement.measurement, measurement_label: measurement.measurement_label }))
         : [];
 
-
-    console.log(data)
-
-
     const dataMax = Math.max(...data.map((measurement) => measurement.measurement));
     const dataMin = Math.min(...data.map((measurement) => measurement.measurement));
 
@@ -118,16 +129,25 @@ function PatientPage({ patientId, newNote, setTrialId })
             ))
         : "";
 
+    const mappedDocuments = documents
+        ? documents.map(document => (
+            <div>
+                <h2>{document.title}</h2>
+                {/* <embed src="https://storage.cloud.google.com/trial-tracker-documents-bucket/ibkmzlmoildrwhg4sm73skgrizsm?authuser=1" width="800px" height="2100px" />
+                <iframe src="<%= rails_blob_path(doc.pdf, disposition: :inline) %>"></iframe> */}
+            </div>
+        )) : "";
+
 
 
     return (
         <div className='patientPage'>
-            <Card style={{ height: '20vw' }}>
+            <Card style={{ minHeight: '20vh' }}>
                 <Card.Header className="d-flex justify-content-between align-items-center">
                     <h3>Patient: {first_name} {last_name}</h3>
                     <Button variant="primary" name="trials" onClick={handleTrialClick}>View Trial</Button>
                 </Card.Header>
-                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', height: '10vh' }}>
+                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
                     <div className='patient-info'>
                         <div className='patient-general-info'>
                             <p><b>Name:</b> {first_name} {last_name}</p>
@@ -209,7 +229,7 @@ function PatientPage({ patientId, newNote, setTrialId })
             </Card>
             <Card>
                 <Card.Header className="d-flex justify-content-between align-items-center">
-                    <h3>Notes</h3>
+                    <h6>Notes</h6>
                     <Button variant="primary" onClick={handleClick}>Create Note</Button>
                 </Card.Header>
                 <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', height: '10vh' }}>
@@ -218,6 +238,7 @@ function PatientPage({ patientId, newNote, setTrialId })
                             <thead>
                                 <tr>
                                     <th scope="col">Date</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Description</th>
                                 </tr>
                             </thead>
@@ -226,6 +247,12 @@ function PatientPage({ patientId, newNote, setTrialId })
                             </tbody>
                         </table>
                     </div>
+                    {/* <FileUploadForm onUpload={handleFileUpload} patientId={patientId} setPdfUrl={setPdfUrl} />
+                    <div>
+
+                        <h2>Documents:</h2>
+                        {mappedDocuments}
+                    </div> */}
                 </Card.Body>
             </Card>
         </div>

@@ -20,16 +20,19 @@ import CreateTrial from './components/CreateTrial';
 import CreatePatient from './components/CreatePatient';
 import CreateNote from './components/CreateNote';
 import TrialsChart from './components/TrialsChart';
+import FileUploadForm from './components/FileUploadForm';
 
 function App()
 {
 
   const [trials, setTrials] = useState([])
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [trialId, setTrialId] = useState()
   const [patientId, setPatientId] = useState()
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState([])
+
+  console.log(patientId)
 
   useEffect(function ()
   {
@@ -43,14 +46,14 @@ function App()
         console.log(data)
         return setTrials(data)
       })
-  }, [])
+  }, [trialId])
 
   return (
     <div className="App">
       {(loggedIn === true) ? (
         <div>
           {/* <Header /> */}
-          < SideNavbar />
+          < SideNavbar setLoggedIn={setLoggedIn} />
 
           <Switch>
 
@@ -62,12 +65,12 @@ function App()
               <Database />
             </Route> */}
 
-            <Route path='/dashboard'>
+            <Route exact path='/'>
               <Dashboard trials={trials} />
             </Route>
 
             <Route path='/trials/create'>
-              <CreateTrial />
+              <CreateTrial setTrialId={setTrialId} trialId={trialId} />
             </Route>
 
             <Route path='/trials/:id'>
@@ -79,7 +82,7 @@ function App()
             </Route>
 
             <Route path='/patients/create'>
-              <CreatePatient />
+              <CreatePatient patientId={patientId} setPatientId={setPatientId} trialId={trialId} />
             </Route>
 
             <Route path='/patients/:id'>
@@ -95,11 +98,11 @@ function App()
             </Route>
 
             {/* <Route path='/notes/:id'>
-              <PatientPage />
+              <Note />
             </Route> */}
 
             <Route path='/notes'>
-              <NotesContainer setNotes={setNotes} newNote={newNote} />
+              <NotesContainer setNotes={setNotes} newNote={newNote} notes={notes} setPatientId={setPatientId} />
             </Route>
 
             <Route path='/myaccount'>
@@ -109,7 +112,7 @@ function App()
           </Switch>
         </div>
       ) : (
-        <Login />
+        <Login setLoggedIn={setLoggedIn} />
       )
       }
 

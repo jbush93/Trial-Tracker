@@ -13,6 +13,7 @@ function PatientsCard({ patient, setPatientId })
     {
         setPatientId(id)
         history.push(`/patients/${id}`);
+        console.log(id)
     }
     return (
         <div className='patientsCard'>

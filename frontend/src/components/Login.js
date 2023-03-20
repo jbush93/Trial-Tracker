@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 // import Lottie from 'react-lottie';
 import animationData from '../lf20_ymEv4F (1).json';
+import { useHistory } from 'react-router-dom';
 
-function Login()
+function Login({ setLoggedIn })
 {
     const defaultOptions = {
         loop: true,
@@ -11,6 +12,38 @@ function Login()
         // rendererSettings: {
         // preserveAspectRatio: 'xMidYMid slice'
         // }
+    }
+
+    let initialState = {
+        email: '',
+        password: ''
+    }
+    const [formState, setFormState] = useState(initialState);
+    const handleChange = (e) =>
+    {
+        setFormState({ ...formState, [e.target.name]: e.target.value });
+        console.log({ ...formState, [e.target.name]: e.target.value });
+    }
+
+
+    function handleSubmit(e)
+    {
+        e.preventDefault();
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formState)
+        })
+            .then(res =>
+            {
+                if (res.ok) {
+                    res.json().then(data => setLoggedIn(true));
+                } else {
+                    res.json().then(obj => console.log(obj.error));
+                }
+            })
     }
 
     return (
@@ -32,15 +65,15 @@ function Login()
                     {/* login form */}
                     <div id="login-form">
                         <form className="form"
-                        // onSubmit={handleSubmit}
+                            onSubmit={handleSubmit}
                         >
-                            <input name="username" type="text"
-                            // required onChange={handleChange} 
-                            // value={formState.username} placeholder="username" 
+                            <input name="email" type="text"
+                                required onChange={handleChange}
+                                placeholder="email"
                             />
                             <input name="password" type="password"
-                            // required onChange={handleChange} 
-                            // value={formState.password} placeholder="password" 
+                                required onChange={handleChange}
+                                placeholder="password"
                             />
                             <button type="submit">Login</button>
                         </form>

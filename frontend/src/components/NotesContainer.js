@@ -1,7 +1,8 @@
 import React, { Component, useEffect, useState } from 'react'
+import NoteCard from './NoteCard'
 
 
-function NotesContainer({ setNotes })
+function NotesContainer({ setNotes, notes, setPatientId })
 {
 
     const [page, setPage] = useState(1)
@@ -51,10 +52,10 @@ function NotesContainer({ setNotes })
         }
     }
 
-    // const mappedPatients = patients.map(function (patient)
-    // {
-    //     return <PatientsCard  />
-    // })
+    const mappedNotes = notes.map(function (note)
+    {
+        return <NoteCard note={note} setPatientId={setPatientId} />
+    })
 
     return (
         <div className='notesContainer'>
@@ -62,7 +63,7 @@ function NotesContainer({ setNotes })
                 <p>search / filter /</p>
             </div>
             <div>
-                {/* {mappedTrials} */}
+                {mappedNotes}
             </div>
             <div>
                 <button onClick={handleBack} disabled={page === 1}>Previous Page</button>

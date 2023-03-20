@@ -3,9 +3,9 @@ require_relative "boot"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
-# require "active_job/railtie"
+require "active_job/railtie"
 require "active_record/railtie"
-# require "active_storage/engine"
+require "active_storage/engine"
 require "action_controller/railtie"
 # require "action_mailer/railtie"
 # require "action_mailbox/engine"
@@ -30,9 +30,7 @@ module PeterPan
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
+        # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.middleware.insert_before 0, Rack::Cors do 
       allow do
@@ -40,6 +38,7 @@ module PeterPan
         resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options] 
       end
     end
-    config.api_only = true
+    config.api_only = false
+    config.session_store :cookie_store, key: 'trial_tracker_app_session', same_site: :lax, secure: Rails.env.production?
   end
 end

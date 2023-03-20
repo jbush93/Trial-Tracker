@@ -43,3 +43,11 @@ gem 'json'
 
 gem 'faker', '~> 1.6', '>= 1.6.6'
 
+gem 'bcrypt'
+
+gem 'activestorage'
+
+gem 'google-cloud-storage'
+
+gem "jsonapi-serializer", "~> 2.2"
+

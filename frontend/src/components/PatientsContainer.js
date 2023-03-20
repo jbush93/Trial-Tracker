@@ -45,10 +45,10 @@ function PatientsContainer({ setPatientId })
         }
     }
 
-    const mappedPatients = patients.map(function (patient)
-    {
-        return <PatientsCard patient={patient} setPatientId={setPatientId} />
-    })
+    const mappedPatients = patients.map((patient) =>
+    (
+        <PatientsCard patient={patient} setPatientId={setPatientId} />
+    ))
 
     return (
         <div className='patientsContainer'>

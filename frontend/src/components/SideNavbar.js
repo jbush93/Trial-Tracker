@@ -4,8 +4,25 @@ import { BiDna } from "react-icons/bi";
 import { SidebarData } from './SidebarData'
 import { Link, NavLink } from 'react-router-dom'
 
-function SideNavbar()
+function SideNavbar({ setLoggedIn })
 {
+    function handleClick()
+    {
+        fetch('http://localhost:3000/login', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(res =>
+            {
+                if (res.ok) {
+                    res.json().then(data => setLoggedIn(false));
+                } else {
+                    res.json().then(obj => console.log(obj.error));
+                }
+            })
+    }
     const mappedSidebarData = SidebarData.map(function (val, key)
     {
         return <li
@@ -24,7 +41,7 @@ function SideNavbar()
         <div className="sidebar">
             <ul className="sidebarlist">
                 {mappedSidebarData}
-                <li className="logout"><button>Logout</button></li>
+                <li className="logout"><button onClick={handleClick}>Logout</button></li>
             </ul>
         </div>
     )

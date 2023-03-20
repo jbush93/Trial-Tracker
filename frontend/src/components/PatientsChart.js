@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { Bar } from 'react-chartjs-2';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 function PatientsChart()
 {
@@ -50,25 +50,25 @@ function PatientsChart()
     ];
 
     return (
-        <LineChart
-            width={450}
-            height={275}
-            data={data}
-            margin={{
-                top: 5,
-                right: 5,
-                left: 30,
-                bottom: 5,
-            }}
-        >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+        <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 5,
+                    left: 30,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            </LineChart>
+        </ResponsiveContainer>
     );
 }
 

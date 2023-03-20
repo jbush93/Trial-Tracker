@@ -19,14 +19,14 @@ function TrialsContainer({ trials, setTrialId })
         setFilter(e.target.value)
     }
 
-    const filteredTrials = trials.filter(trial => (
+    const filteredTrials = trials.filter((trial) => (
         (filter === 'All') ? true : trial.phase === filter
     ));
 
-    const mappedTrials = filteredTrials.map(function (trial)
-    {
-        return <TrialsCard trial={trial} setTrialId={setTrialId} />
-    })
+    const mappedTrials = filteredTrials.map((trial) =>
+    (
+        <TrialsCard trial={trial} setTrialId={setTrialId} />
+    ))
 
     const mappedOptions = trials
         ? [...new Set(trials.map((trial) => trial.phase))]
@@ -46,7 +46,7 @@ function TrialsContainer({ trials, setTrialId })
                 </select>
                 <p>search / filter / <button onClick={handleClick}>create new</button></p>
             </div>
-            <div>
+            <div className=''>
                 {mappedTrials}
             </div>
         </div>

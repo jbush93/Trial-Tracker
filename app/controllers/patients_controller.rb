@@ -13,4 +13,15 @@ class PatientsController < ApplicationController
         patient = Patient.find(params[:id])
         render json: patient, status: :ok
     end
+
+    def create 
+        patient = Patient.create!(patient_params)
+        render json: patient, status: :created
+    end
+
+    private
+    def patient_params 
+        params.permit(:trial_id, :first_name, :last_name, :address, :gender, :weight, :height, :age, :placebo)
+    end
+
 end

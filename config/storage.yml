@@ -1,0 +1,19 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+google_dev:
+  service: GCS
+  project: trial-tracker-380902
+  credentials: 'config/gkey.json'
+  bucket: trial-tracker-documents-bucket
+
+google:
+  service: GCS
+  project: trial-tracker-380902
+  credentials: 'config/gkey.json'
+  bucket: trial-tracker-documents-bucket

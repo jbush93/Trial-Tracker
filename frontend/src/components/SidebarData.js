@@ -10,7 +10,7 @@ export const SidebarData = [
     {
         title: "Dashboard",
         icon: <AiFillDashboard />,
-        link: "/dashboard"
+        link: "/"
     },
     {
         title: "Trials",
