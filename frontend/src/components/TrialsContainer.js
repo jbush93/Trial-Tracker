@@ -46,12 +46,18 @@ function TrialsContainer({ trials, setTrialId })
 
     return (
         <div className='trialsContainer'>
-            <div>
-                <select onChange={handleFilterChange}>
-                    <option>All</option>
-                    {mappedOptions}
-                </select>
-                <input onChange={handleChange} />
+            <div className="trials-container-header">
+                <div>
+                    <label>Phase: </label>
+                    <select onChange={handleFilterChange}>
+                        <option>All</option>
+                        {mappedOptions}
+                    </select>
+                </div>
+                <div>
+                    <label>Search: </label>
+                    <input onChange={handleChange} />
+                </div>
                 <button onClick={handleClick}>create new</button>
             </div>
             <div className=''>

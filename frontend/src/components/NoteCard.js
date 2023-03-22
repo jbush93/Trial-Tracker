@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function NoteCard({ note, setPatientId })
 {
     console.log(note)
-    const { title, description, patient_id } = note
+    const { title, description, patient_id, patient } = note
 
     let history = useHistory();
     function handleClick()
@@ -16,9 +16,9 @@ function NoteCard({ note, setPatientId })
     }
     return (
         <div className='trialsCard'>
-            Note Card
-            <p>{title}</p>
-            <p>{description}</p>
+            <p><b>{title}</b></p>
+            <p>Patient: {patient.first_name} {patient.last_name}</p>
+            <p>Description: {description}</p>
             <button onClick={handleClick}>View Patient</button>
         </div>
     )

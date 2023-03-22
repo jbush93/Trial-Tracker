@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
-// import { useNavigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 
 function PatientsCard({ patient, setPatientId })
 {
@@ -15,11 +15,17 @@ function PatientsCard({ patient, setPatientId })
     }
     return (
         <div className='patientsCard'>
-            <p>{first_name} {last_name} </p>
-            <p>Gender: {gender}</p>
-            <p>Age: {age}</p>
-            <p>Trial: {trial.brief_title}</p>
-            <button onClick={handleClick}>View Details</button>
+            <Card style={{ height: "25vh" }}>
+                <Card.Header className="d-flex justify-content-between align-items-center">
+                    <h5>{first_name} {last_name}</h5>
+                    <Button variant="primary" name="trials" onClick={handleClick}>View Patient Details</Button >
+                </Card.Header>
+                <Card.Body>
+                    <p>Gender: {gender}</p>
+                    <p>Age: {age}</p>
+                    <p>Trial: {trial.brief_title}</p>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

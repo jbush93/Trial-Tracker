@@ -52,8 +52,9 @@ function PatientsContainer({ setPatientId })
 
     return (
         <div className='patientsContainer'>
-            <div>
-                <p>search / filter / <button onClick={handleClick}>create new</button></p>
+            <div className="patients-container-header">
+                <h1>Patients</h1>
+                <button onClick={handleClick}>create new</button>
             </div>
             <div className='patientCardStorage'>
                 {mappedPatients}

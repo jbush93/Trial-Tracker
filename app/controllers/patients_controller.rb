@@ -3,7 +3,7 @@ require 'will_paginate/array'
 class PatientsController < ApplicationController
 
     def index 
-        patients = Patient.all.paginate(:page => params[:page], :per_page => 6)
+        patients = Patient.all.paginate(:page => params[:page], :per_page => 4)
         response.headers['Total-Pages'] = patients.total_pages
         headers['Access-Control-Expose-Headers'] = 'Total-Pages'
         render json: patients, status: :ok

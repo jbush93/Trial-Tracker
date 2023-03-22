@@ -237,7 +237,7 @@ function PatientPage({ patientId, newNote, setTrialId })
                     <h6>Notes</h6>
                     <Button variant="primary" onClick={handleClick}>Create Note</Button>
                 </Card.Header>
-                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', height: '10vh' }}>
+                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
                     <div className='patient-info'>
                         <table className="table">
                             <thead>

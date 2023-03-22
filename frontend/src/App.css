@@ -217,6 +217,14 @@ a:hover {
   justify-content: center;
 }
 
+.trials-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  height: 50px;
+}
+
 .create-trials {
   display: flex;
   margin-left: 255px;
@@ -352,7 +360,7 @@ a:hover {
 
 .patientsContainer {
   margin-left: 255px;
-  background: pink;
+  /* background: pink; */
   height: 100%;
   width: 81vw;
   padding: 0.5em;
@@ -365,8 +373,39 @@ a:hover {
   justify-content: center;
 }
 
+.patients-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(236, 233, 233);
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(173, 173, 173);
+  border-width: 1px;
+}
+
+.patients-container-header button {
+  border-radius: 5px;
+  background-color: #e37f87;
+  border-color: #e37f87;
+  color: white;
+  margin-right: 20px;
+}
+
+.patients-container-header h1 {
+  margin-left: 20px;
+}
+
+.patients-container-header button {
+  border-radius: 5px;
+  background-color: #e37f87;
+  border-color: #e37f87;
+  color: white;
+  margin-right: 20px;
+}
+
 .patientsCard {
-  background: lightblue;
+  /* background: lightblue; */
   margin: 0.5em;
   width: 35vw;
   height: 30%;
@@ -374,10 +413,10 @@ a:hover {
 }
 
 .patientCardStorage {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   height: 75vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -426,7 +465,7 @@ patient-document-info {
 
 .patientsButtons {
   height: 10vh;
-  background-color: aqua;
+  /* background-color: aqua; */
   justify-content: center;
   text-align: center;
 }
@@ -475,14 +514,26 @@ patient-document-info {
 .notesContainer {
   margin-left: 255px;
   background: pink;
-  height: 97vh;
+  height: 100vh;
   width: 82vw;
   padding: 0.5em;
   /* margin: 25vh auto 0; */
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 
   justify-content: center;
+}
+
+.noteCardStorage {
+  background-color: aquamarine;
+  height: 75vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* align-items: center; */
+  /* margin: auto; */
+  vertical-align: top;
 }
