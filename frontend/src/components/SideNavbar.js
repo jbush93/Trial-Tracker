@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { AiFillDashboard } from "react-icons/ai";
 import { BiDna } from "react-icons/bi";
 import { SidebarData } from './SidebarData'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 
 function SideNavbar({ setLoggedIn })
 {
+    let history = useHistory()
     function handleClick()
     {
         fetch('http://localhost:3000/login', {
@@ -17,7 +18,7 @@ function SideNavbar({ setLoggedIn })
             .then(res =>
             {
                 if (res.ok) {
-                    res.json().then(data => setLoggedIn(false));
+                    res.json().then(data => setLoggedIn(false)).then(history.push(`/`));
                 } else {
                     res.json().then(obj => console.log(obj.error));
                 }

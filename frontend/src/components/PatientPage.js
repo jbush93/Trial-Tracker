@@ -13,6 +13,8 @@ function PatientPage({ patientId, newNote, setTrialId })
     const [currentChartMeasurement, setCurrentChartMeasurement] = useState('')
     const [patient, setPatient] = useState([])
     const [pdfUrl, setPdfUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState(null);
+    const [addDocument, setAddDocument] = useState(false)
 
     let history = useHistory();
     function handleClick(e)
@@ -27,13 +29,16 @@ function PatientPage({ patientId, newNote, setTrialId })
         console.log(e.target.value)
     }
 
-    const [imageUrl, setImageUrl] = useState(null);
 
     function handleFileUpload(url)
     {
         setImageUrl(url);
     }
 
+    function handleUploadClick()
+    {
+        setAddDocument(!addDocument)
+    }
 
 
     useEffect(function ()
@@ -133,8 +138,8 @@ function PatientPage({ patientId, newNote, setTrialId })
         ? documents.map(document => (
             <div>
                 <h2>{document.title}</h2>
-                {/* <embed src="https://storage.cloud.google.com/trial-tracker-documents-bucket/ibkmzlmoildrwhg4sm73skgrizsm?authuser=1" width="800px" height="2100px" />
-                <iframe src="<%= rails_blob_path(doc.pdf, disposition: :inline) %>"></iframe> */}
+                {/* <embed src={document.pdf_url} width="800px" height="2100px" /> */}
+                <iframe src={document.pdf_url}></iframe>
             </div>
         )) : "";
 
@@ -247,12 +252,18 @@ function PatientPage({ patientId, newNote, setTrialId })
                             </tbody>
                         </table>
                     </div>
-                    {/* <FileUploadForm onUpload={handleFileUpload} patientId={patientId} setPdfUrl={setPdfUrl} />
-                    <div>
-
-                        <h2>Documents:</h2>
+                </Card.Body>
+            </Card>
+            <Card>
+                <Card.Header className="d-flex justify-content-between align-items-center">
+                    <h6>Documents</h6>
+                    <Button variant="primary" onClick={handleUploadClick}>Upload Document</Button>
+                </Card.Header>
+                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
+                    <div className='patient-document-info'>
+                        {addDocument ? <FileUploadForm onUpload={handleFileUpload} patientId={patientId} setPdfUrl={setPdfUrl} setAddDocument={setAddDocument} /> : ""}
                         {mappedDocuments}
-                    </div> */}
+                    </div>
                 </Card.Body>
             </Card>
         </div>

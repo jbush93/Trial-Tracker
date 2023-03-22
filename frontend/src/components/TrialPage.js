@@ -1,12 +1,31 @@
 import React, { Component, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { Card, Button, Modal, Container, Row, Col } from 'react-bootstrap';
 import GenderChart from './GenderChart';
 
-function TrialPage({ trialId, setPatientId })
+function TrialPage({ trialId, setPatientId, setDeletedTrial })
 {
     const [newCondition, setNewCondition] = useState([])
     const [newGroup, setNewGroup] = useState([])
+    const [newLocation, setNewLocation] = useState([])
+    const [editTrial, setEditTrial] = useState(false)
+    const [trial, setTrial] = useState([])
+    const [trialState, setTrialState] = useState({
+        NCTId: "",
+        phase: "",
+        official_title: "",
+        detailed_description: "",
+        organization_name: "",
+        lead_sponsor: "",
+        study_type: "",
+        overall_status: "",
+        start_date: "",
+        primary_completion_date: "",
+        primary_completion_date_type: "",
+        contact_name: "",
+        contact_email: "",
+        contact_phone: "",
+    })
 
     useEffect(function ()
     {
@@ -18,15 +37,38 @@ function TrialPage({ trialId, setPatientId })
             .then(function (data)
             {
                 console.log(data)
-                return setTrial(data)
+                setTrial(data)
+                return setTrialState({
+                    NCTId: data.NCTId,
+                    phase: data.phase,
+                    official_title: data.official_title,
+                    detailed_description: data.detailed_description,
+                    organization_name: data.organization_name,
+                    lead_sponsor: data.lead_sponsor,
+                    study_type: data.study_type,
+                    overall_status: data.overall_status,
+                    start_date: data.start_date,
+                    primary_completion_date: data.primary_completion_date,
+                    primary_completion_date_type: data.primary_completion_date_type,
+                    contact_name: data.contact_name,
+                    contact_email: data.contact_email,
+                    contact_phone: data.contact_phone,
+                })
             })
-    }, [newCondition, newGroup])
+    }, [newCondition, newGroup, editTrial, newLocation])
+
+    const { NCTId, official_title, detailed_description, organization_name, lead_sponsor, patients, study_type, phase, start_date, overall_status, primary_completion_date, primary_completion_date_type, conditions, locations, arm_groups, outcomes, contact_name, contact_email, contact_phone, id, brief_title } = trial
 
     let history = useHistory();
     function handlePatientClick(e)
     {
         setPatientId(e.target.value)
         history.push(`/patients/${e.target.value}`)
+    }
+
+    function handleEditClick()
+    {
+        setEditTrial(!editTrial)
     }
 
     function handleAddPatient()
@@ -77,11 +119,35 @@ function TrialPage({ trialId, setPatientId })
         description: "",
         intervention_name: "",
     })
+    const [addLocation, setAddLocation] = useState(false)
+    function handleAddLocation()
+    {
+        setAddLocation(!addLocation)
+    }
 
-    function handleConditionChange(e)
+    const [locationState, setLocationState] = useState({
+        facility: "",
+        city: "",
+        state: "",
+        country: "",
+        trial_id: trialId,
+    })
+
+    function handleLocationChange(e)
+    {
+        setLocationState(locationState => ({ ...locationState, [e.target.name]: e.target.value }))
+    }
+    function handleGroupChange(e)
     {
         setGroupState(groupState => ({ ...groupState, [e.target.name]: e.target.value }))
     }
+
+
+    function handleTrialChange(e)
+    {
+        setTrialState(trialState => ({ ...trialState, [e.target.name]: e.target.value }))
+    }
+    console.log(trialState)
     function handleGroupSubmit(e)
     {
         e.preventDefault()
@@ -96,9 +162,36 @@ function TrialPage({ trialId, setPatientId })
             .then(data => setNewGroup(data))
             .then(setAddGroup(false))
     }
+    function handleLocationSubmit(e)
+    {
+        e.preventDefault()
+        fetch(`http://localhost:3000/locations`, {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(locationState)
+        })
+            .then(res => res.json())
+            .then(data => setNewLocation(data))
+            .then(setAddLocation(false))
+    }
 
-    const [trial, setTrial] = useState([])
-    const { NCTId, official_title, detailed_description, organization_name, lead_sponsor, patients, study_type, phase, start_date, overall_status, primary_completion_date, primary_completion_date_type, conditions, locations, arm_groups, outcomes, contact_name, contact_email, contact_phone, id, brief_title } = trial
+    function handleEditTrialSubmit(e)
+    {
+        e.preventDefault()
+        fetch(`http://localhost:3000/trials/${trialId}`, {
+            method: 'PATCH',
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(trialState)
+        })
+            .then(res => res.json())
+            .then(data => setTrial(data))
+            .then(setEditTrial(false))
+    }
+
 
     const mappedConditions = conditions ? conditions.map(function (condition)
     {
@@ -138,6 +231,35 @@ function TrialPage({ trialId, setPatientId })
         </div>
     }) : "";
 
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleDeleteClick = () =>
+    {
+        setShowModal(true);
+    }
+
+    const handleConfirmDelete = () =>
+    {
+        fetch(`http://localhost:3000/trials/${trialId}`, {
+            method: 'DELETE',
+            headers: {
+                "content-type": "application/json",
+            },
+        })
+            .then(res => res.text())
+            .then(data => setDeletedTrial(data))
+            .then(setDeletedTrial([]))
+            .then(setShowModal(false))
+            .then(history.push('/trials'))
+    }
+
+
+    const handleCancelDelete = () =>
+    {
+        setShowModal(false);
+    }
+
     return (
         <div className='trialsContainer'>
             <Card style={{ minHeight: '50vh', width: '85vw' }}>
@@ -146,36 +268,74 @@ function TrialPage({ trialId, setPatientId })
                     style={{ backgroundColor: '#e46872', color: 'black' }}
                 >
                     <h3>Trial {id} - {brief_title} </h3>
-                    <Button variant="primary" name="trials">Edit Trial</Button>
+                    <Button variant="primary" name="trials" onClick={handleEditClick}>Edit Trial</Button>
                 </Card.Header>
                 <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
-                    <div className='main-trial-info'>
-                        <div className='main-trial-left'>
-                            <p><b>NCTId:</b> {NCTId}</p>
-                            <p><b>Phase:</b> {phase}</p>
-                            <p><b>Official Title:</b> {official_title}</p>
-                            <p><b>Description:</b> {detailed_description}</p>
+                    {editTrial ?
+                        <div className='main-trial-info'>
+                            <div>
+                                <form onSubmit={handleEditTrialSubmit}>
+                                    <label>NTCId:</label>
+                                    <input type="text" name="NCTId" defaultValue={NCTId} onChange={handleTrialChange} />
+                                    <label>Phase:</label>
+                                    <input type="text" name="phase" defaultValue={phase} onChange={handleTrialChange} />
+                                    <label>Offical Title:</label>
+                                    <input type="text" name="official_title" defaultValue={official_title} onChange={handleTrialChange} />
+                                    <label>Description:</label>
+                                    <input type="text" name="detailed_description" defaultValue={detailed_description} style={{ width: "250px", height: "250px" }} wrap="soft" onChange={handleTrialChange} />
+                                    <label>Organization:</label>
+                                    <input type="text" name="organization_name" defaultValue={organization_name} onChange={handleTrialChange} />
+                                    <label>Lead Sponsor:</label>
+                                    <input type="text" name="lead_sponsor" defaultValue={lead_sponsor} onChange={handleTrialChange} />
+                                    <label>Study Type:</label>
+                                    <input type="text" name="study_type" defaultValue={study_type} onChange={handleTrialChange} />
+                                    <label>Status:</label>
+                                    <input type="text" name="overall_status" defaultValue={overall_status} onChange={handleTrialChange} />
+                                    <label>Start Date:</label>
+                                    <input type="text" name="start_date" defaultValue={start_date} onChange={handleTrialChange} />
+                                    <label>Completion date:</label>
+                                    <input type="text" name="primary_completion_date" defaultValue={primary_completion_date} onChange={handleTrialChange} />
+                                    <label>Completion date type:</label>
+                                    <input type="text" name="primary_completion_date_type" defaultValue={primary_completion_date_type} onChange={handleTrialChange} />
+                                    <label>contact name:</label>
+                                    <input type="text" name="contact_name" defaultValue={contact_name} onChange={handleTrialChange} />
+                                    <label>contact email:</label>
+                                    <input type="text" name="contact_email" defaultValue={contact_email} onChange={handleTrialChange} />
+                                    <label>contact phone:</label>
+                                    <input type="text" name="contact_phone" defaultValue={contact_phone} onChange={handleTrialChange} />
+                                    <button type="submit">Submit Edits</button>
+                                </form>
+                            </div>
                         </div>
-                        <div className='main-trial-right'>
-                            <p><b>Organization:</b> {organization_name}</p>
-                            <p><b>Lead Sponsor:</b> {lead_sponsor}</p>
-                            {patients && <p><b>Amount of Patients:</b> {patients.length}</p>}
-                            <p><b>Study Type:</b> {study_type}</p>
-                            <p><b>Status:</b> {overall_status}</p>
-                            <p><b>Start Date:</b> {start_date} | completion date: {primary_completion_date} {primary_completion_date_type}</p>
-                            <p><b>Contact Name:</b> {contact_name}</p>
-                            <p><b>Contact Email:</b> {contact_email}</p>
-                            <p><b>Contact Phone:</b> {contact_phone}</p>
+                        :
+                        <div className='main-trial-info'>
+                            <div className='main-trial-left'>
+                                <p><b>NCTId:</b> {NCTId}</p>
+                                <p><b>Phase:</b> {phase}</p>
+                                <p><b>Official Title:</b> {official_title}</p>
+                                <p><b>Description:</b> {detailed_description}</p>
+                            </div>
+                            <div className='main-trial-right'>
+                                <p><b>Organization:</b> {organization_name}</p>
+                                <p><b>Lead Sponsor:</b> {lead_sponsor}</p>
+                                {patients && <p><b>Amount of Patients:</b> {patients.length}</p>}
+                                <p><b>Study Type:</b> {study_type}</p>
+                                <p><b>Status:</b> {overall_status}</p>
+                                <p><b>Start Date:</b> {start_date} | completion date: {primary_completion_date} {primary_completion_date_type}</p>
+                                <p><b>Contact Name:</b> {contact_name}</p>
+                                <p><b>Contact Email:</b> {contact_email}</p>
+                                <p><b>Contact Phone:</b> {contact_phone}</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </Card.Body>
             </Card>
-            <Card style={{ height: '100vh', width: '85vw' }}>
+            <Card style={{ minHeight: '25vh', width: '85vw' }}>
                 <Card.Header className="d-flex justify-content-between align-items-center">
                     <h6>Patients </h6>
                     <Button variant="primary" name="trials" onClick={handleAddPatient}>Add Patient</Button>
                 </Card.Header>
-                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', height: '10vh' }}>
+                <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
                     <div className='patients-trial-info'>
                         {mappedPatients}
                     </div>
@@ -205,13 +365,13 @@ function TrialPage({ trialId, setPatientId })
                     <div className='arm-groups-trial-info'>
                         {addGroup ? <form onSubmit={handleGroupSubmit}>
                             <label>Label</label>
-                            <input type="text" name="label" onChange={handleConditionChange} />
+                            <input type="text" name="label" onChange={handleGroupChange} />
                             <label>group type</label>
-                            <input type="text" name="group_type" onChange={handleConditionChange} />
+                            <input type="text" name="group_type" onChange={handleGroupChange} />
                             <label>description</label>
-                            <input type="text" name="description" onChange={handleConditionChange} />
+                            <input type="text" name="description" onChange={handleGroupChange} />
                             <label>intervention name</label>
-                            <input type="text" name="intervention_name" onChange={handleConditionChange} />
+                            <input type="text" name="intervention_name" onChange={handleGroupChange} />
                             <button type='submit'>Add</button>
                         </form> : ""}
                         {mappedArmGroups}
@@ -221,10 +381,21 @@ function TrialPage({ trialId, setPatientId })
             <Card style={{ minHeight: '30vh', width: '85vw' }}>
                 <Card.Header className="d-flex justify-content-between align-items-center">
                     <h6>Locations</h6>
-                    <Button variant="primary" name="trials">Add Location</Button>
+                    <Button variant="primary" name="trials" onClick={handleAddLocation}>Add Location</Button>
                 </Card.Header>
                 <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '20vh' }}>
                     <div className='locations-trial-info'>
+                        {addLocation ? <form onSubmit={handleLocationSubmit}>
+                            <label>facility</label>
+                            <input type="text" name="facility" onChange={handleLocationChange} />
+                            <label>city</label>
+                            <input type="text" name="city" onChange={handleLocationChange} />
+                            <label>state</label>
+                            <input type="text" name="state" onChange={handleLocationChange} />
+                            <label>country</label>
+                            <input type="text" name="country" onChange={handleLocationChange} />
+                            <button type='submit'>Add</button>
+                        </form> : ""}
                         {mappedLocations}
                     </div>
                 </Card.Body>
@@ -239,8 +410,23 @@ function TrialPage({ trialId, setPatientId })
                         {mappedOutcomes}
                     </div>
                 </Card.Body>
+                {/* <GenderChart trial={trial} /> */}
             </Card>
-            <GenderChart trial={trial} />
+            <Button onClick={handleDeleteClick}>Delete</Button>
+            <Modal show={showModal} onHide={handleCancelDelete}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this item?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCancelDelete}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleConfirmDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div >
     )
 }

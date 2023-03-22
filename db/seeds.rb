@@ -185,5 +185,7 @@ Location.create(trial_id: 10, facility: "China", city: "Shanghai", state: "Shang
     )
 end
 
+User.create(first_name: "Jerrod", last_name: "Bush", username: "jbush", password: "password", email: "123@test.com", phone_number: "1234567890")
+
 
 puts "done seeding!"

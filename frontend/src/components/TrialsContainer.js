@@ -6,7 +6,15 @@ function TrialsContainer({ trials, setTrialId })
 {
 
     const [filter, setFilter] = useState('All')
+    const [searchValue, setSearchValue] = useState("")
+
     let history = useHistory();
+
+    function handleChange(e)
+    {
+        console.log(e.target.value)
+        setSearchValue(e.target.value)
+    }
 
     function handleClick(e)
     {
@@ -20,7 +28,7 @@ function TrialsContainer({ trials, setTrialId })
     }
 
     const filteredTrials = trials.filter((trial) => (
-        (filter === 'All') ? true : trial.phase === filter
+        trial.brief_title.toLowerCase().includes(searchValue.toLowerCase()) && (filter === 'All') ? true : trial.phase === filter
     ));
 
     const mappedTrials = filteredTrials.map((trial) =>
@@ -36,7 +44,6 @@ function TrialsContainer({ trials, setTrialId })
         : "";
 
 
-
     return (
         <div className='trialsContainer'>
             <div>
@@ -44,7 +51,8 @@ function TrialsContainer({ trials, setTrialId })
                     <option>All</option>
                     {mappedOptions}
                 </select>
-                <p>search / filter / <button onClick={handleClick}>create new</button></p>
+                <input onChange={handleChange} />
+                <button onClick={handleClick}>create new</button>
             </div>
             <div className=''>
                 {mappedTrials}

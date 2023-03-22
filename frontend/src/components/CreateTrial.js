@@ -48,9 +48,8 @@ function CreateTrial({ setTrialId, trialId })
         })
             .then(res => res.json())
             .then(data => setTrialId(data.id))
-            .then(history.push(`/trials/${trialId}`))
+            .then(data => history.push(`/trials/${trialId}`))
     }
-
     return (
         <div className='create-trials'>
             <form onSubmit={handleSubmit}>

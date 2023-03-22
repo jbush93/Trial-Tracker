@@ -42,9 +42,11 @@ function CreateNote({ patientId, setNewNote })
             <div className='homeItem'>
                 <h1>Create Note</h1>
                 <form onSubmit={handleSubmit}>
+                    <label for="date">Date: </label>
                     <input type="date" id='date-input' name='date' onChange={handleChange}></input>
-                    <label for="party-size">Party Size: </label>
+                    <label for="title">Title: </label>
                     <input type="text" id='title' name='title' onChange={handleChange}></input>
+                    <label for="description">Description: </label>
                     <input type="text" id='description' name='description' onChange={handleChange}></input>
                     <button type='submit'>Create Note</button>
                 </form>

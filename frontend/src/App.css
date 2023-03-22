@@ -172,7 +172,7 @@ a:hover {
   min-height: 96vh;
   display: flex;
   margin-left: 255px;
-  background: pink;
+  /* background: pink; */
   width: 82vw;
   padding: 0.5em;
   /* margin: 25vh auto 0; */
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .homeItem {
-  background: lightblue;
+  /* background: lightblue; */
   margin: 0.5em;
   width: 100%;
   text-align: center;
@@ -415,6 +415,12 @@ a:hover {
 
 .patient-condition-info li {
   list-style-type: none;
+}
+
+patient-document-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 

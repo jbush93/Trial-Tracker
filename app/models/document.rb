@@ -6,6 +6,10 @@ class Document < ApplicationRecord
   has_one_attached :pdf, service: :google
 
   def pdf_url
-    Rails.application.routes.url_helpers.url_for(pdf) if pdf.attached?
+    if self.pdf.attached?
+      return 'https://storage.googleapis.com/trial-tracker-documents-bucket/' + self.pdf.key
+   else 
+       return nil
+   end
   end
 end

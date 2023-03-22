@@ -31,6 +31,7 @@ function App()
   const [patientId, setPatientId] = useState()
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState([])
+  const [deletedTrial, setDeletedTrial] = useState([]);
 
   console.log(patientId)
 
@@ -46,7 +47,7 @@ function App()
         console.log(data)
         return setTrials(data)
       })
-  }, [trialId])
+  }, [trialId, deletedTrial])
 
   return (
     <div className="App">
@@ -74,11 +75,16 @@ function App()
             </Route>
 
             <Route path='/trials/:id'>
-              <TrialPage trialId={trialId} setPatientId={setPatientId} />
+              <TrialPage trialId={trialId} setPatientId={setPatientId} setDeletedTrial={setDeletedTrial} />
             </Route>
 
             <Route path='/trials'>
-              <TrialsContainer trials={trials} setTrialId={setTrialId} />
+              <TrialsContainer
+                trials={trials}
+                setTrials={setTrials}
+                setTrialId={setTrialId}
+
+              />
             </Route>
 
             <Route path='/patients/create'>

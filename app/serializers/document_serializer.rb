@@ -1,4 +1,3 @@
-class DocumentSerializer
-  include JSONAPI::Serializer
-  attributes :title, :patient_id, :document_url, :pdf_url
+class DocumentSerializer < ActiveModel::Serializer
+  attributes :id, :title, :patient_id, :pdf_url
 end

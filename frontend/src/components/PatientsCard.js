@@ -6,8 +6,6 @@ function PatientsCard({ patient, setPatientId })
 {
     const { id, first_name, last_name, address, gender, height, age, weight, trial, trial_id, notes, conditions, measurements } = patient
 
-
-
     let history = useHistory();
     function handleClick()
     {

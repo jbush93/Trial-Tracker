@@ -49,5 +49,4 @@ gem 'activestorage'
 
 gem 'google-cloud-storage'
 
-gem "jsonapi-serializer", "~> 2.2"
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function FileUploadForm({ patientId, setPdfUrl })
+function FileUploadForm({ patientId, setPdfUrl, setAddDocument })
 {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
@@ -40,6 +40,7 @@ function FileUploadForm({ patientId, setPdfUrl })
                 console.log(data);
                 setPdfUrl(data.pfp_url)
             })
+            .then(data => setAddDocument(false))
             .catch((error) =>
             {
                 console.error('There was a problem with the fetch operation:', error);
