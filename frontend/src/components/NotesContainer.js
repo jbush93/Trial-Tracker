@@ -92,7 +92,6 @@ function NotesContainer({ setNotes, notes, setPatientId })
                 </table>
             </div>
             <div className='patientsButtons'>
-                {/* need to add some logic for these buttons */}
                 pagination?
                 <button onClick={handleBack} disabled={page === 1}>Previous Page</button>
                 <button onClick={handleNext} disabled={page === totalPages}>Next Page</button>
