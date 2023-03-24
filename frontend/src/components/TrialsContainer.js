@@ -60,7 +60,7 @@ function TrialsContainer({ trials, setTrialId })
                 </div>
                 <button onClick={handleClick}>create new</button>
             </div>
-            <div className=''>
+            <div className='mapped-trials'>
                 {mappedTrials}
             </div>
         </div>

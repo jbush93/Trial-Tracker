@@ -136,9 +136,10 @@ function PatientPage({ patientId, newNote, setTrialId })
 
     const mappedDocuments = documents
         ? documents.map(document => (
-            <div>
+            <div className='mapped-documents'>
                 <h2>{document.title}</h2>
                 {/* <embed src={document.pdf_url} width="800px" height="2100px" /> */}
+                <a href={document.pdf_url}>Link</a>
                 <iframe src={document.pdf_url}></iframe>
             </div>
         )) : "";

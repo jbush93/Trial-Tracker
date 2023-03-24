@@ -11,6 +11,8 @@ class TrialSerializer < ActiveModel::Serializer
   def patient_measurements 
     object.measurements.map do |item|
       {
+        first_name: item.patient.first_name,
+        last_name: item.patient.last_name,
         gender: item.patient.gender,
         age: item.patient.age,
         weight: item.patient.weight,

@@ -1,70 +1,86 @@
-import React, { Component, useEffect, useState } from 'react'
-import PatientsCard from './PatientsCard'
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PatientsCard from './PatientsCard';
+import { debounce } from 'lodash';
 
 function PatientsContainer({ setPatientId })
 {
+  const [patients, setPatients] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
+  function handleBack()
+  {
+    setPage(page - 1);
+  }
 
-    let history = useHistory();
-    function handleClick(e)
-    {
-        // console.log(e.target.name)
-        history.push(`/patients/create`);
-    }
-    const [patients, setPatients] = useState([])
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
+  function handleNext()
+  {
+    setPage(page + 1);
+  }
 
-    useEffect(function ()
-    {
-        fetch(`http://localhost:3000/patients?page=${page}`)
-            .then(function (resp)
-            {
-                // Get the total number of pages from the response headers
-                const totalPages = parseInt(resp.headers.get('Total-Pages'))
-                // console.log(resp.headers.get('Total-Pages'))
-                setTotalPages(totalPages)
+  function handleSearch(e)
+  {
+    setPage(1);
+    setSearchQuery(e.target.value);
+    console.log(e.target.value)
+  }
 
-                return resp.json()
-            })
-            .then(function (data)
-            {
-                return setPatients(data)
-            })
-    }, [page])
-    // console.log(totalPages)
-    function handleBack()
-    {
-        setPage(page - 1)
-    }
-    function handleNext()
-    {
-        if (page < totalPages) { // Check if we are not on the last page
-            setPage(page + 1)
-        }
+  const fetchPatients = () =>
+  {
+    let url = `http://localhost:3000/patients?page=${page}`;
+    if (searchQuery) {
+      url += `&query=${searchQuery}`;
     }
 
-    const mappedPatients = patients.map((patient) =>
-    (
-        <PatientsCard patient={patient} setPatientId={setPatientId} />
-    ))
+    fetch(url)
+      .then((resp) =>
+      {
+        const totalPages = parseInt(resp.headers.get('Total-Pages'));
+        setTotalPages(totalPages);
+        return resp.json();
+      })
+      .then((data) =>
+      {
+        setPatients(data);
+      });
+  };
 
-    return (
-        <div className='patientsContainer'>
-            <div className="patients-container-header">
-                <h1>Patients</h1>
-                <button onClick={handleClick}>create new</button>
-            </div>
-            <div className='patientCardStorage'>
-                {mappedPatients}
-            </div>
-            <div className='patientsButtons'>
-                <button onClick={handleBack} disabled={page === 1}>Previous Page</button>
-                <button onClick={handleNext} disabled={page === totalPages}>Next Page</button>
-            </div>
-        </div>
-    )
+  const debouncedFetchPatients = debounce(fetchPatients, 750);
+
+  useEffect(() =>
+  {
+    console.log(searchQuery)
+    debouncedFetchPatients();
+    return () => debouncedFetchPatients.cancel();
+  }, [page, searchQuery]);
+
+  const mappedPatients = patients.map((patient) => (
+    <PatientsCard patient={patient} setPatientId={setPatientId} />
+  ));
+
+  return (
+    <div className='patientsContainer'>
+      <div className='patients-container-header'>
+        <h1>Patients</h1>
+        <form onChange={handleSearch}>
+          <label>Search: </label>
+          <input type='text' name='search' placeholder='Enter Last Name' />
+          {/* <button type='submit'>Search</button> */}
+        </form>
+      </div>
+      <div className='patientCardStorage'>{mappedPatients}</div>
+      <div className='patientsButtons'>
+        <button onClick={handleBack} disabled={page === 1}>
+          Previous Page
+        </button>
+        <button onClick={handleNext} disabled={page === totalPages}>
+          Next Page
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default PatientsContainer
+export default PatientsContainer;

@@ -5,8 +5,10 @@ function GenderChart({ trial })
 {
     console.log(trial)
 
-    const malePatients = trial.patients.filter(patient => patient.gender === 'Male');
-    const femalePatients = trial.patients.filter(patient => patient.gender === 'Female');
+    const { patients } = trial
+
+    const malePatients = patients.filter(patient => patient.gender === 'Male');
+    const femalePatients = patients.filter(patient => patient.gender === 'Female');
 
     const data = [
         { name: 'Male', value: malePatients.length },
@@ -17,9 +19,9 @@ function GenderChart({ trial })
 
 
     return (
-        <div style={{ height: 250, paddingTop: 10, display: 'flex' }}>
+        <div style={{ minHeight: 250, paddingTop: 10, display: 'flex' }}>
             <ResponsiveContainer>
-                <PieChart width={400} height={400}>
+                <PieChart width={500} height={500}>
                     <Pie
                         data={data}
                         cx={200}
