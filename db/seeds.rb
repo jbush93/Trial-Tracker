@@ -181,8 +181,42 @@ Location.create(trial_id: 10, facility: "China", city: "Shanghai", state: "Shang
         gender: Faker::Gender.binary_type,
         weight: rand(100..200),
         height: rand(60..80),
-        age: rand(18..65)
+        age: rand(18..65),
+        placebo: Faker::Boolean.boolean
     )
+end
+
+100.times do
+  Note.create(
+    patient_id: Patient.all.sample.id,
+    date: "05/03/2023",
+    title: "update",
+    description: "first update"
+  )
+end
+100.times do
+  Note.create(
+    patient_id: Patient.all.sample.id,
+    date: "10/03/2023",
+    title: "update",
+    description: "second update. going well"
+  )
+end
+100.times do
+  Note.create(
+    patient_id: Patient.all.sample.id,
+    date: "15/03/2023",
+    title: "update",
+    description: "third update. meh."
+  )
+end
+100.times do
+  Note.create(
+    patient_id: Patient.all.sample.id,
+    date: "20/03/2023",
+    title: "update",
+    description: "fourth update. patient doing well"
+  )
 end
 
 User.create(first_name: "Jerrod", last_name: "Bush", username: "jbush", password: "password", email: "123@test.com", phone_number: "1234567890")

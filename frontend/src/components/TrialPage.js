@@ -4,7 +4,7 @@ import { Card, Button, Modal, Container, Row, Col } from 'react-bootstrap';
 import GenderChart from './GenderChart';
 import ChartTwo from './ChartTwo';
 
-function TrialPage({ trialId, setPatientId, setDeletedTrial })
+function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
 {
   const [newCondition, setNewCondition] = useState([])
   const [newGroup, setNewGroup] = useState([])
@@ -56,7 +56,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
           contact_phone: data.contact_phone,
         })
       })
-  }, [newCondition, newGroup, editTrial, newLocation])
+  }, [newCondition, newGroup, editTrial, newLocation, deletedPatient])
 
   console.log(trial.patients)
 
@@ -208,6 +208,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
     return <div className='box-patients-trial-info'>
       <p>{patient.first_name} {patient.last_name}</p>
       <p>{patient.gender} age: {patient.age}</p>
+      <p>Placebo: {patient.placebo ? "True" : "False"}</p>
       <button onClick={handlePatientClick} value={patient.id}>View Patient</button>
     </div>
   }) : "";
@@ -232,10 +233,12 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
 
   const mappedOutcomes = outcomes ? outcomes.map(function (outcome)
   {
-    return <div>
-      <p>Description: {outcome.outcome_description}</p>
-      <p>Measure: {outcome.outcome_measure} | Timeframe: {outcome.outcome_timeframe} | Type: {outcome.outcome_type}</p>
-    </div>
+    return <tr>
+      <td>{outcome.outcome_description}</td>
+      <td>{outcome.outcome_measure}</td>
+      <td>{outcome.outcome_timeframe}</td>
+      <td>{outcome.outcome_type}</td>
+    </tr>
   }) : "";
 
 
@@ -291,37 +294,37 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
         <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '10vh' }}>
           {editTrial ?
             <div className='main-trial-info'>
-              <div>
+              <div className='form-container'>
                 <form onSubmit={handleEditTrialSubmit}>
                   <label>NTCId:</label>
-                  <input type="text" name="NCTId" defaultValue={NCTId} onChange={handleTrialChange} />
+                  <input type="text" name="NCTId" className="form-control" defaultValue={NCTId} onChange={handleTrialChange} />
                   <label>Phase:</label>
-                  <input type="text" name="phase" defaultValue={phase} onChange={handleTrialChange} />
+                  <input type="text" name="phase" className="form-control" defaultValue={phase} onChange={handleTrialChange} />
                   <label>Offical Title:</label>
-                  <input type="text" name="official_title" defaultValue={official_title} onChange={handleTrialChange} />
+                  <input type="text" name="official_title" className="form-control" defaultValue={official_title} onChange={handleTrialChange} />
                   <label>Description:</label>
-                  <input type="text" name="detailed_description" defaultValue={detailed_description} style={{ width: "250px", height: "250px" }} wrap="soft" onChange={handleTrialChange} />
+                  <textarea type="text" name="detailed_description" className="form-control" defaultValue={detailed_description} wrap="soft" onChange={handleTrialChange} />
                   <label>Organization:</label>
-                  <input type="text" name="organization_name" defaultValue={organization_name} onChange={handleTrialChange} />
+                  <input type="text" name="organization_name" className="form-control" defaultValue={organization_name} onChange={handleTrialChange} />
                   <label>Lead Sponsor:</label>
-                  <input type="text" name="lead_sponsor" defaultValue={lead_sponsor} onChange={handleTrialChange} />
+                  <input type="text" name="lead_sponsor" className="form-control" defaultValue={lead_sponsor} onChange={handleTrialChange} />
                   <label>Study Type:</label>
-                  <input type="text" name="study_type" defaultValue={study_type} onChange={handleTrialChange} />
+                  <input type="text" name="study_type" className="form-control" defaultValue={study_type} onChange={handleTrialChange} />
                   <label>Status:</label>
-                  <input type="text" name="overall_status" defaultValue={overall_status} onChange={handleTrialChange} />
+                  <input type="text" name="overall_status" className="form-control" defaultValue={overall_status} onChange={handleTrialChange} />
                   <label>Start Date:</label>
-                  <input type="text" name="start_date" defaultValue={start_date} onChange={handleTrialChange} />
+                  <input type="text" name="start_date" className="form-control" defaultValue={start_date} onChange={handleTrialChange} />
                   <label>Completion date:</label>
-                  <input type="text" name="primary_completion_date" defaultValue={primary_completion_date} onChange={handleTrialChange} />
+                  <input type="text" name="primary_completion_date" className="form-control" defaultValue={primary_completion_date} onChange={handleTrialChange} />
                   <label>Completion date type:</label>
-                  <input type="text" name="primary_completion_date_type" defaultValue={primary_completion_date_type} onChange={handleTrialChange} />
+                  <input type="text" name="primary_completion_date_type" className="form-control" defaultValue={primary_completion_date_type} onChange={handleTrialChange} />
                   <label>contact name:</label>
-                  <input type="text" name="contact_name" defaultValue={contact_name} onChange={handleTrialChange} />
+                  <input type="text" name="contact_name" className="form-control" defaultValue={contact_name} onChange={handleTrialChange} />
                   <label>contact email:</label>
-                  <input type="text" name="contact_email" defaultValue={contact_email} onChange={handleTrialChange} />
+                  <input type="text" name="contact_email" className="form-control" defaultValue={contact_email} onChange={handleTrialChange} />
                   <label>contact phone:</label>
-                  <input type="text" name="contact_phone" defaultValue={contact_phone} onChange={handleTrialChange} />
-                  <button type="submit">Submit Edits</button>
+                  <input type="text" name="contact_phone" className="form-control" defaultValue={contact_phone} onChange={handleTrialChange} />
+                  <button type="submit" className="btn btn-primary">Submit Edits</button>
                 </form>
               </div>
             </div>
@@ -389,7 +392,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
         <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '20vh' }}>
           <div className='conditions-trial-info'>
             {addCondition ? <form onSubmit={handleConditionSubmit}>
-              <input type="text" name="condition" onChange={handleConditionChange} />
+              <input type="text" name="condition" onChange={handleConditionChange} required />
               <button type='submit'>Add</button>
             </form> : ""}
             {mappedConditions}
@@ -405,13 +408,13 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
           <div className='arm-groups-trial-info'>
             {addGroup ? <form onSubmit={handleGroupSubmit}>
               <label>Label</label>
-              <input type="text" name="label" onChange={handleGroupChange} />
+              <input type="text" name="label" onChange={handleGroupChange} required />
               <label>group type</label>
-              <input type="text" name="group_type" onChange={handleGroupChange} />
+              <input type="text" name="group_type" onChange={handleGroupChange} required />
               <label>description</label>
-              <input type="text" name="description" onChange={handleGroupChange} />
+              <input type="text" name="description" onChange={handleGroupChange} required />
               <label>intervention name</label>
-              <input type="text" name="intervention_name" onChange={handleGroupChange} />
+              <input type="text" name="intervention_name" onChange={handleGroupChange} required />
               <button type='submit'>Add</button>
             </form> : ""}
             {mappedArmGroups}
@@ -427,13 +430,13 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
           <div className='locations-trial-info'>
             {addLocation ? <form onSubmit={handleLocationSubmit}>
               <label>facility</label>
-              <input type="text" name="facility" onChange={handleLocationChange} />
+              <input type="text" name="facility" onChange={handleLocationChange} required />
               <label>city</label>
-              <input type="text" name="city" onChange={handleLocationChange} />
+              <input type="text" name="city" onChange={handleLocationChange} required />
               <label>state</label>
-              <input type="text" name="state" onChange={handleLocationChange} />
+              <input type="text" name="state" onChange={handleLocationChange} required />
               <label>country</label>
-              <input type="text" name="country" onChange={handleLocationChange} />
+              <input type="text" name="country" onChange={handleLocationChange} required />
               <button type='submit'>Add</button>
             </form> : ""}
             <table className="table" style={{ width: "80vw" }}>
@@ -459,11 +462,23 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial })
         </Card.Header>
         <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '20vh' }}>
           <div className='outcomes-trial-info'>
-            {mappedOutcomes}
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Description</th>
+                  <th scope="col">Measure</th>
+                  <th scope="col">Timeframe</th>
+                  <th scope="col">Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mappedOutcomes}
+              </tbody>
+            </table>
           </div>
         </Card.Body>
       </Card>
-      <Button onClick={handleDeleteClick}>Delete</Button>
+      <Button onClick={handleDeleteClick} id="trial-delete-button">Delete</Button>
       <Modal show={showModal} onHide={handleCancelDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>

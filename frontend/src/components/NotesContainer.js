@@ -1,98 +1,116 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import NoteCard from './NoteCard'
+import NoteCard from './NoteCard';
 
-
-function NotesContainer({ setNotes, notes, setPatientId })
+function NotesContainer({ setNotes, notes, setPatientId, userId })
 {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchValue, setSearchValue] = useState('');
+  let history = useHistory()
 
-  const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
-  const [searchValue, setSearchValue] = useState("")
-
-  useEffect(function ()
+  useEffect(() =>
   {
-    fetch("http://localhost:3000/notes")
-      .then(function (resp)
+    fetch('http://localhost:3000/notes')
+      .then((resp) => resp.json())
+      .then((data) =>
       {
-        return resp.json()
-      })
-      .then(function (data)
-      {
-        console.log(data)
-        return setNotes(data)
-      })
-  }, [])
+        console.log("running notes");
+        setNotes(data);
+        setTotalPages(Math.ceil(data.length / 10));
+      });
+  }, [userId]);
 
   function handleBack()
   {
-    setPage(page - 1)
+    setPage((prevPage) => prevPage - 1);
   }
+
   function handleNext()
   {
-    if (page < totalPages) { // Check if we are not on the last page
-      setPage(page + 1)
+    if (page < totalPages) {
+      setPage((prevPage) => prevPage + 1);
     }
   }
 
   function handleChange(e)
   {
-    console.log(e.target.value)
-    setSearchValue(e.target.value)
+    setSearchValue(e.target.value);
   }
 
-  const filteredNotes = notes.filter((note) => (
-    note.patient.last_name.toLowerCase().includes(searchValue.toLowerCase())
-  ));
-
-  let history = useHistory();
   function handleClick(e)
   {
-    setPatientId(e.target.id)
+    setPatientId(e.target.id);
     history.push(`/patients/${e.target.id}`);
   }
 
-  const mappedNotes = filteredNotes ? filteredNotes.map(function (note)
+  function paginateNotes()
   {
-    return <tr>
-      <td>{note.date}</td>
-      <td>{note.patient.first_name} {note.patient.last_name}</td>
-      <td>{note.title}</td>
-      <td>{note.description}</td>
-      <td><button onClick={handleClick} id={note.patient_id}>View Patient</button></td>
-    </tr>;
-  }) : "";
+    const notesPerPage = 16;
+    const totalNotes = notes.length;
+    const startIndex = (page - 1) * notesPerPage;
+    const endIndex = startIndex + notesPerPage;
+    const paginatedNotes = notes
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .filter((note) =>
+        note.patient.last_name.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      .slice(startIndex, endIndex);
+    return paginatedNotes;
+  }
 
+  const paginatedNotes = paginateNotes();
+
+  const mappedNotes = paginatedNotes
+    ? paginatedNotes.map((note) => (
+      <tr key={note.id}>
+        <td>{note.date}</td>
+        <td>
+          {note.patient.first_name} {note.patient.last_name}
+        </td>
+        <td>{note.title}</td>
+        <td>{note.description}</td>
+        <td>
+          <button onClick={handleClick} id={note.patient_id}>
+            View Patient
+          </button>
+        </td>
+      </tr>
+    ))
+    : '';
 
   return (
     <div className='notesContainer'>
       <div className='notes-container-header'>
-        <label>Search: </label>
-        <input onChange={handleChange} placeholder='Enter Last Name' />
+        <div>
+          <input onChange={handleChange} placeholder='Enter Last Name' />
+        </div>
       </div>
-      <div className="noteCardStorage">
-        <table className="table">
+      <div className='noteCardStorage'>
+        <table className='table'>
           <thead>
             <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Patient</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">View</th>
+              <th scope='col'>Date</th>
+              <th scope='col'>Patient</th>
+              <th scope='col'>Title</th>
+              <th scope='col'>Description</th>
+              <th scope='col'>View</th>
             </tr>
           </thead>
-          <tbody>
-            {mappedNotes}
-          </tbody>
+          <tbody>{mappedNotes}</tbody>
         </table>
+        <div className='pagination'>
+          <button onClick={handleBack} disabled={page === 1}>
+            Previous
+          </button>
+          <button onClick={handleNext} disabled={page === totalPages}>
+            Next
+          </button>
+        </div>
       </div>
-      {/* <div className='patientsButtons'>
-                pagination?
-                <button onClick={handleBack} disabled={page === 1}>Previous Page</button>
-                <button onClick={handleNext} disabled={page === totalPages}>Next Page</button>
-            </div> */}
     </div>
-  )
+  );
 }
 
-export default NotesContainer
+export default NotesContainer;
+

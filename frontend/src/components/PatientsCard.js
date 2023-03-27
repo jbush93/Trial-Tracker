@@ -15,7 +15,7 @@ function PatientsCard({ patient, setPatientId })
   }
   return (
     <div className='patientsCard'>
-      <Card style={{ height: "25vh" }}>
+      <Card style={{ minHeight: "25vh" }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h5>{first_name} {last_name}</h5>
           <Button variant="primary" name="trials" onClick={handleClick}>View Patient Details</Button >

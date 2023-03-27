@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CreateTrial({ setTrialId, trialId })
 {
@@ -55,77 +56,79 @@ function CreateTrial({ setTrialId, trialId })
 
   return (
     <div className='create-trials'>
-      <form onSubmit={handleSubmit}>
-        <label>NCTId:</label>
-        <input type="text" name="NCTId" value={study.NCTId} onChange={handleChange} /><br />
+      <div className='form-container'>
+        <form onSubmit={handleSubmit}>
+          <label>NCTId:</label>
+          <input type="text" className="form-control" name="NCTId" value={study.NCTId} onChange={handleChange} required /><br />
 
-        <label>Organization Name:</label>
-        <input type="text" name="organization_name" value={study.organization_name} onChange={handleChange} /><br />
+          <label>Organization Name:</label>
+          <input type="text" className="form-control" name="organization_name" value={study.organization_name} onChange={handleChange} required /><br />
 
-        <label>Brief Title:</label>
-        <input type="text" name="brief_title" value={study.brief_title} onChange={handleChange} /><br />
+          <label>Brief Title:</label>
+          <input type="text" className="form-control" name="brief_title" value={study.brief_title} onChange={handleChange} required /><br />
 
-        <label>Official Title:</label>
-        <input type="text" name="official_title" value={study.official_title} onChange={handleChange} /><br />
+          <label>Official Title:</label>
+          <input type="text" className="form-control" name="official_title" value={study.official_title} onChange={handleChange} required /><br />
 
-        <label>Overall Status:</label>
-        <input type="text" name="overall_status" value={study.overall_status} onChange={handleChange} /><br />
+          <label>Overall Status:</label>
+          <input type="text" className="form-control" name="overall_status" value={study.overall_status} onChange={handleChange} required /><br />
 
-        <label>Start Date:</label>
-        <input type="text" name="start_date" value={study.start_date} onChange={handleChange} /><br />
+          <label>Start Date:</label>
+          <input type="text" className="form-control" name="start_date" value={study.start_date} onChange={handleChange} required /><br />
 
-        <label>Primary Completion Date:</label>
-        <input type="text" name="primary_completion_date" value={study.primary_completion_date} onChange={handleChange} /><br />
+          <label>Primary Completion Date:</label>
+          <input type="text" className="form-control" name="primary_completion_date" value={study.primary_completion_date} onChange={handleChange} required /><br />
 
-        <label>Primary Completion Type:</label>
-        <input type="text" name="primary_completion_date_type" value={study.primary_completion_date_type} onChange={handleChange} /><br />
+          <label>Primary Completion Type:</label>
+          <input type="text" className="form-control" name="primary_completion_date_type" value={study.primary_completion_date_type} onChange={handleChange} required /><br />
 
-        <label>Lead Sponsor:</label>
-        <input type="text" name="lead_sponsor" value={study.lead_sponsor} onChange={handleChange} /><br />
+          <label>Lead Sponsor:</label>
+          <input type="text" className="form-control" name="lead_sponsor" value={study.lead_sponsor} onChange={handleChange} required /><br />
 
-        <label>FDA Regulated Drug:</label>
-        <input type="text" name="is_fda_regulated_drug" value={study.is_fda_regulated_drug} onChange={handleChange} /><br />
+          <label>FDA Regulated Drug:</label>
+          <input type="text" className="form-control" name="is_fda_regulated_drug" value={study.is_fda_regulated_drug} onChange={handleChange} required /><br />
 
-        <label>FDA Regulated Device:</label>
-        <input type="text" name="is_fda_regulated_device" value={study.is_fda_regulated_device} onChange={handleChange} /><br />
+          <label>FDA Regulated Device:</label>
+          <input type="text" className="form-control" name="is_fda_regulated_device" value={study.is_fda_regulated_device} onChange={handleChange} required /><br />
 
-        <label>Brief Summary:</label>
-        <textarea name="brief_summary" value={study.brief_summary} onChange={handleChange} /><br />
+          <label>Brief Summary:</label>
+          <textarea name="brief_summary" className="form-control" value={study.brief_summary} onChange={handleChange} required /><br />
 
-        <label>Detailed Description:</label>
-        <textarea name="detailed_description" value={study.detailed_description} onChange={handleChange} /><br />
+          <label>Detailed Description:</label>
+          <textarea name="detailed_description" className="form-control" value={study.detailed_description} onChange={handleChange} required /><br />
 
-        <label>Study Type:</label>
-        <input type="text" name="study_type" value={study.study_type} onChange={handleChange} /><br />
+          <label>Study Type:</label>
+          <input type="text" className="form-control" name="study_type" value={study.study_type} onChange={handleChange} required /><br />
 
-        <label>Phase:</label>
-        <input type="text" name="phase" value={study.phase} onChange={handleChange} /><br />
+          <label>Phase:</label>
+          <input type="text" className="form-control" name="phase" value={study.phase} onChange={handleChange} required /><br />
 
-        <label>Intervention Type:</label>
-        <input type="text" name="intervention_type" value={study.intervention_type} onChange={handleChange} /><br />
+          <label>Intervention Type:</label>
+          <input type="text" className="form-control" name="intervention_type" value={study.intervention_type} onChange={handleChange} required /><br />
 
-        <label>Intervention Description:</label>
-        <textarea name="intervention_description" value={study.intervention_description} onChange={handleChange} /><br />
+          <label>Intervention Description:</label>
+          <textarea name="intervention_description" className="form-control" value={study.intervention_description} onChange={handleChange} required /><br />
 
-        <label>Eligibility Criteria:</label>
-        <textarea name="eligibility_criteria" value={study.eligibility_criteria} onChange={handleChange} /><br />
+          <label>Eligibility Criteria:</label>
+          <textarea name="eligibility_criteria" className="form-control" value={study.eligibility_criteria} onChange={handleChange} required /><br />
 
-        <label>Gender:</label>
-        <input type="text" name="gender" value={study.gender} onChange={handleChange} /><br />
+          <label>Gender:</label>
+          <input type="text" name="gender" className="form-control" value={study.gender} onChange={handleChange} /><br required />
 
-        <label>Minimum Age:</label>
-        <input type="number" name="minimum_age" value={study.minimum_age} onChange={handleChange} /><br />
+          <label>Minimum Age:</label>
+          <input type="number" name="minimum_age" className="form-control" value={study.minimum_age} onChange={handleChange} required /><br />
 
-        <label>Contact Name:</label>
-        <input type="text" name="contact_name" value={study.contact_name} onChange={handleChange} /><br />
+          <label>Contact Name:</label>
+          <input type="text" name="contact_name" className="form-control" value={study.contact_name} onChange={handleChange} required /><br />
 
-        <label>Contact Phone:</label>
-        <input type="text" name="contact_phone" value={study.contact_phone} onChange={handleChange} /><br />
+          <label>Contact Phone:</label>
+          <input type="text" name="contact_phone" className="form-control" value={study.contact_phone} onChange={handleChange} required /><br />
 
-        <label>Contact Email:</label>
-        <input type="text" name="contact_email" value={study.contact_email} onChange={handleChange} /><br />
-        <button type="submit">submit</button>
-      </form>
+          <label>Contact Email:</label>
+          <input type="text" name="contact_email" className="form-control" value={study.contact_email} onChange={handleChange} required /><br />
+          <button type="submit" className="btn btn-primary">submit</button>
+        </form>
+      </div>
     </div>
   )
 }

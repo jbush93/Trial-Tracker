@@ -18,7 +18,8 @@ class TrialSerializer < ActiveModel::Serializer
         weight: item.patient.weight,
         date: item.date,
         measurement: item.measurement,
-        measurement_label: item.measurement_label
+        measurement_label: item.measurement_label,
+        placebo_group: item.patient.placebo
       }
     end
   end

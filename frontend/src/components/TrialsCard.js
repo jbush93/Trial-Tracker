@@ -16,7 +16,7 @@ function TrialsCard({ trial, setTrialId })
   }
   return (
     <div className='trialsCard'>
-      <Card style={{ height: "30vh" }}>
+      <Card style={{ minHeight: "30vh" }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h5>Trial - {brief_title}</h5>
           <Button variant="primary" name="trials" onClick={handleClick}>View Details</Button >

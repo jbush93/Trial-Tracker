@@ -34,9 +34,6 @@ function ChartTwo({ patient_measurements })
 
   const formattedDataSorted = formattedData ? formattedData.sort((a, b) => a.date - b.date) : "";
 
-  const malePatients = formattedDataSorted ? formattedDataSorted.filter((measurement) => measurement.gender === 'Male') : "";
-  const femalePatients = formattedDataSorted ? formattedDataSorted.filter((measurement) => measurement.gender === 'Female') : "";
-
   const mappedOptions = patient_measurements
     ? [...new Set(patient_measurements.map((measurement) => measurement.measurement_label))]
       .map((measurement_label) => (
@@ -62,14 +59,21 @@ function ChartTwo({ patient_measurements })
         <Legend payload={[
           { value: 'Male', type: 'circle', id: 'male-scatter', color: 'lightblue' },
           { value: 'Female', type: 'circle', id: 'female-scatter', color: 'pink' },
+          { value: 'Male (Placebo)', type: 'circle', id: 'male-placebo-scatter', color: 'blue' },
+          { value: 'Female (Placebo)', type: 'circle', id: 'female-placebo-scatter', color: 'violet' },
         ]} />
         <Scatter data={formattedDataSorted} fill="#8884d8" >
           {
             formattedDataSorted ? formattedDataSorted.map((measurement) => (
-              <Cell fill={measurement.gender === 'Male' ? 'lightblue' : 'pink'} />
+              <Cell fill={
+                measurement.gender === 'Male' && measurement.placebo_group === true ? 'blue' :
+                  measurement.gender === 'Female' && measurement.placebo_group === true ? 'violet' :
+                    measurement.gender === 'Male' ? 'lightblue' : 'pink'
+              } />
             )) : ""
           }
         </Scatter>
+
       </ScatterChart>
       <select onChange={handleMeasurementChange}>
         <option>Select Measurement</option>

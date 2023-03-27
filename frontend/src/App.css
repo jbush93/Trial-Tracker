@@ -28,14 +28,14 @@ h1 {
   width: 30vw;
 }
 
-.container {
+.dashboard-container {
   /* background-color: pink; */
   height: 100vh;
   width: 100vw;
-  align-content: center;
-  justify-content: center;
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 }
 
 a {
@@ -225,19 +225,24 @@ a:hover {
   height: 50px;
 }
 
+.form-container {
+  width: 50vw;
+  text-align: center;
+  /* background-color: pink; */
+  justify-content: center;
+}
+
 .create-trials {
   display: flex;
   margin-left: 255px;
-  /* background: pink; */
+  /* background: aliceblue; */
   height: 98%;
   width: 85vw;
   padding: 0.5em;
   /* margin: 25vh auto 0; */
 
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-
+  text-align: center;
   justify-content: center;
 }
 
@@ -400,15 +405,21 @@ a:hover {
   margin-right: 20px;
 }
 
+.patientsButtons button {
+  height: 30px;
+  width: 150px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
 .patients-container-header h1 {
   margin-left: 20px;
 }
 
-.patients-container-header button {
+.pagination button {
+  height: 30px;
+  width: 100px;
   border-radius: 5px;
-  background-color: #e37f87;
-  border-color: #e37f87;
-  color: white;
   margin-right: 20px;
 }
 
@@ -517,10 +528,57 @@ patient-document-info {
 .login {
   height: 100vh;
   width: 100vw;
+  background-color: rgba(0, 0, 0, 1);
 }
+
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('clinical-laboratory.jpg');
+  background-size: cover;
+  opacity: 0.5;
+}
+
 
 .login-title {
   text-align: center;
+  opacity: 1;
+}
+
+.login h1 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+}
+
+.login button {
+  border-radius: 5px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 5px;
+}
+
+.login input {
+  margin-left: 5px;
+}
+
+#login-form {
+  text-align: center;
+}
+
+#login-form-container {
+  background-color: rgba(0, 0, 0, .4);
+  height: 125px;
+  width: 500px;
+  border-radius: 20px;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+  justify-content: center;
 }
 
 .notesContainer {
@@ -529,9 +587,9 @@ patient-document-info {
   width: 85vw;
   padding: 0.5em;
   /* margin: 25vh auto 0; */
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-self: flex-start;
   justify-content: center;
@@ -540,8 +598,8 @@ patient-document-info {
 }
 
 .noteCardStorage {
-  background-color: aliceblue;
-  height: 75vh;
+  /* background-color: aliceblue; */
+  min-height: 75vh;
   width: 84vw;
   display: flex;
   flex-direction: row;
@@ -550,6 +608,7 @@ patient-document-info {
   /* align-items: center; */
   /* margin: auto; */
   vertical-align: top;
+  margin-top: 10px;
 }
 
 .notes-container-header {
@@ -562,4 +621,17 @@ patient-document-info {
   border-color: rgb(173, 173, 173);
   border-width: 1px;
   vertical-align: top !important;
+  margin-top: 0;
+  height: 40px;
+  width: 50%;
+}
+
+.notes-container-header input {
+  margin-left: 10px;
+  width: 600px;
+}
+
+#trial-delete-button {
+  margin-top: 10px;
+  width: 100px;
 }

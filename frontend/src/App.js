@@ -32,6 +32,8 @@ function App()
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState([])
   const [deletedTrial, setDeletedTrial] = useState([]);
+  const [deletedPatient, setDeletedPatient] = useState([]);
+  const [userId, setUserId] = useState(0)
 
   console.log(patientId)
 
@@ -48,6 +50,19 @@ function App()
         return setTrials(data)
       })
   }, [trialId, deletedTrial])
+
+  useEffect(function ()
+  {
+    fetch(`http://localhost:3000/users/${userId}`)
+      .then(function (resp)
+      {
+        return resp.json()
+      })
+      .then(function (data)
+      {
+        console.log(data)
+      })
+  }, [userId])
 
   return (
     <div className="App">
@@ -67,7 +82,7 @@ function App()
             </Route> */}
 
             <Route exact path='/'>
-              <Dashboard trials={trials} />
+              <Dashboard trials={trials} notes={notes} userId={userId} />
             </Route>
 
             <Route path='/trials/create'>
@@ -75,7 +90,7 @@ function App()
             </Route>
 
             <Route path='/trials/:id'>
-              <TrialPage trialId={trialId} setPatientId={setPatientId} setDeletedTrial={setDeletedTrial} />
+              <TrialPage trialId={trialId} setPatientId={setPatientId} setDeletedTrial={setDeletedTrial} deletedPatient={deletedPatient} />
             </Route>
 
             <Route path='/trials'>
@@ -92,7 +107,7 @@ function App()
             </Route>
 
             <Route path='/patients/:id'>
-              <PatientPage patientId={patientId} newNote={newNote} setTrialId={setTrialId} />
+              <PatientPage patientId={patientId} newNote={newNote} setTrialId={setTrialId} setDeletedPatient={setDeletedPatient} />
             </Route>
 
             <Route path='/patients'>
@@ -118,7 +133,7 @@ function App()
           </Switch>
         </div>
       ) : (
-        <Login setLoggedIn={setLoggedIn} />
+        <Login setLoggedIn={setLoggedIn} setUserId={setUserId} />
       )
       }
 

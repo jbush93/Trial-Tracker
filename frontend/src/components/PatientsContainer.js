@@ -63,9 +63,7 @@ function PatientsContainer({ setPatientId })
   return (
     <div className='patientsContainer'>
       <div className='patients-container-header'>
-        <h1>Patients</h1>
         <form onChange={handleSearch}>
-          <label>Search: </label>
           <input type='text' name='search' placeholder='Enter Last Name' />
           {/* <button type='submit'>Search</button> */}
         </form>
@@ -73,10 +71,10 @@ function PatientsContainer({ setPatientId })
       <div className='patientCardStorage'>{mappedPatients}</div>
       <div className='patientsButtons'>
         <button onClick={handleBack} disabled={page === 1}>
-          Previous Page
+          Previous
         </button>
         <button onClick={handleNext} disabled={page === totalPages}>
-          Next Page
+          Next
         </button>
       </div>
     </div>
