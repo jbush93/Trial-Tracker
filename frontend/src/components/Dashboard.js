@@ -75,7 +75,6 @@ function Dashboard({ trials, notes })
       description,
     };
 
-    // Send new event to the backend
     fetch('http://localhost:3000/events', {
       method: 'POST',
       headers: {
