@@ -5,8 +5,8 @@ Trial Tracker is a trial management system for companies to manage their clinica
 ## github repository
 https://github.com/jbush93/Trial-Tracker
 
-## Wireframe
-insert image
+## Video Demo of Application
+insert link
 
 ## User Stories
 1. A user can login with authenticated, password protection
@@ -25,6 +25,8 @@ insert image
 14. A user can create measurements on the patient's page
 15. A user can delete measurements on the patient's page
 16. A user can edit a patient
+17. A user can add events
+18. A user can view events in a calendar
 
 ## Backend
 Here's a breakdown of the backend:
@@ -71,11 +73,12 @@ Here's a breakdown of the backend:
 ## Technologies / Libraries / Packages
 * Ruby
 * Ruby on Rails
-* will-paginate (gem)
+* Will-Paginate (gem)
 * Bcrypt (gem)
 * ActiveRecord
 * React
 * JavaScript
-* D3 / Recharts
+* Recharts (D3)
+* React-Big-Calendar
 * Bootstrap CSS
 * CSS
