@@ -56,22 +56,17 @@ Here's a breakdown of the backend:
 10. An Arm Group
     belongs_to :trial
 ### Entity-Relationship Diagram (ERD)
-insert image
+<img src="trial-tracker-schema.jpg">
 
 ### Model Validations
 
 ### API Endpoints
-insert image
-
-### Serializer Example
-insert image of serializer
+<img src="trial-tracker-api-endpoints.jpg">
 
 ## Frontend
 ### React Client-Side Routing
-insert image
+<img src="trial-tracker-client-endpoints.jpg">
 
-### React Component Tree
-insert image
 
 ## Technologies / Libraries / Packages
 * Ruby

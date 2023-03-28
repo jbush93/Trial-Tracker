@@ -68,18 +68,9 @@ function App()
     <div className="App">
       {(loggedIn === true) ? (
         <div>
-          {/* <Header /> */}
           < SideNavbar setLoggedIn={setLoggedIn} />
 
           <Switch>
-
-            {/* <Route path='/home'>
-              <Home />
-            </Route>
-
-            <Route path='/database'>
-              <Database />
-            </Route> */}
 
             <Route exact path='/'>
               <Dashboard trials={trials} notes={notes} userId={userId} />
@@ -98,7 +89,6 @@ function App()
                 trials={trials}
                 setTrials={setTrials}
                 setTrialId={setTrialId}
-
               />
             </Route>
 
@@ -117,10 +107,6 @@ function App()
             <Route path='/notes/create'>
               <CreateNote patientId={patientId} setNewNote={setNewNote} />
             </Route>
-
-            {/* <Route path='/notes/:id'>
-              <Note />
-            </Route> */}
 
             <Route path='/notes'>
               <NotesContainer setNotes={setNotes} newNote={newNote} notes={notes} setPatientId={setPatientId} />

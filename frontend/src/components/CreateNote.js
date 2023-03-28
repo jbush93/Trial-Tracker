@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
 function CreateNote({ patientId, setNewNote })
 {
-  // console.log(patientId)
+
   let history = useHistory();
+  const [formState, setFormState] = useState(initialState);
 
   const initialState = {
     patient_id: patientId,
@@ -14,11 +15,9 @@ function CreateNote({ patientId, setNewNote })
   };
 
   //create form state
-  const [formState, setFormState] = useState(initialState);
   const handleChange = (e) =>
   {
     setFormState({ ...formState, [e.target.name]: e.target.value });
-    // console.log({ ...formState, [e.target.name]: e.target.value });
   }
 
   const handleSubmit = (e) =>

@@ -9,6 +9,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   const [newCondition, setNewCondition] = useState([])
   const [newGroup, setNewGroup] = useState([])
   const [newLocation, setNewLocation] = useState([])
+  const [newOutcome, setNewOutcome] = useState([])
   const [editTrial, setEditTrial] = useState(false)
   const [trial, setTrial] = useState([])
   const [trialState, setTrialState] = useState({
@@ -56,7 +57,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           contact_phone: data.contact_phone,
         })
       })
-  }, [newCondition, newGroup, editTrial, newLocation, deletedPatient])
+  }, [newCondition, newGroup, editTrial, newLocation, deletedPatient, newOutcome])
 
   console.log(trial.patients)
 
@@ -147,7 +148,6 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
     setGroupState(groupState => ({ ...groupState, [e.target.name]: e.target.value }))
   }
 
-
   function handleTrialChange(e)
   {
     setTrialState(trialState => ({ ...trialState, [e.target.name]: e.target.value }))
@@ -196,7 +196,39 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
       .then(data => setTrial(data))
       .then(setEditTrial(false))
   }
+  const [addOutcome, setAddOutcome] = useState(false)
+  function handleAddOutcome()
+  {
+    setAddOutcome(!addOutcome)
+  }
 
+  const [outcomeState, setOutcomeState] = useState({
+    outcome_type: "",
+    outcome_measure: "",
+    outcome_description: "",
+    outcome_timeframe: "",
+    trial_id: trialId,
+  })
+
+  function handleOutcomeChange(e)
+  {
+    setOutcomeState(outcomeState => ({ ...outcomeState, [e.target.name]: e.target.value }))
+  }
+
+  function handleOutcomeSubmit(e)
+  {
+    e.preventDefault()
+    fetch(`http://localhost:3000/outcomes`, {
+      method: 'POST',
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(outcomeState)
+    })
+      .then(res => res.json())
+      .then(data => setNewOutcome(data))
+      .then(setAddOutcome(false))
+  }
 
   const mappedConditions = conditions ? conditions.map(function (condition)
   {
@@ -356,7 +388,6 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           <h6>Aggregate Patient Measurements </h6>
         </Card.Header>
         <Card.Body>
-          {/* <GenderChart trial={trial} /> */}
           <ChartTwo patient_measurements={patient_measurements} />
           <table className="table">
             <thead>
@@ -458,11 +489,22 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
       <Card style={{ minHeight: '30vh', width: '85vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Outcomes</h6>
-          <Button variant="primary" name="trials">Add Outcome</Button>
+          <Button variant="primary" name="trials" onClick={handleAddOutcome}>Add Outcome</Button>
         </Card.Header>
         <Card.Body className="d-flex justify-content-between align-items-center" style={{ width: '80vw', minHeight: '20vh' }}>
           <div className='outcomes-trial-info'>
-            <table className="table">
+            {addOutcome ? <form onSubmit={handleOutcomeSubmit}>
+              <label>Outcome Type: </label>
+              <input type="text" name="outcome_type" onChange={handleOutcomeChange} required />
+              <label>Outcome Measure</label>
+              <input type="text" name="outcome_measure" onChange={handleOutcomeChange} required />
+              <label>Outcome Description</label>
+              <textarea type="text" name="outcome_description" onChange={handleOutcomeChange} required />
+              <label>Outcome Timeframe</label>
+              <input type="text" name="outcome_timeframe" onChange={handleOutcomeChange} required />
+              <button type='submit'>Add</button>
+            </form> : ""}
+            <table className="table" style={{ width: "80vw" }}>
               <thead>
                 <tr>
                   <th scope="col">Description</th>

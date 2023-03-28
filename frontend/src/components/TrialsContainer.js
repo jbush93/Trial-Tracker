@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import TrialsCard from './TrialsCard'
 import { useHistory } from 'react-router-dom';
 
@@ -16,9 +16,8 @@ function TrialsContainer({ trials, setTrialId })
     setSearchValue(e.target.value)
   }
 
-  function handleClick(e)
+  function handleClick()
   {
-    // console.log(e.target.name)
     history.push(`/trials/create`);
   }
 

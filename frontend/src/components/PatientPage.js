@@ -1,9 +1,8 @@
 import React, { Component, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
+import { Card, Button, Modal } from 'react-bootstrap';
 import FileUploadForm from './FileUploadForm';
-import PdfViewer from './PdfViewer';
 
 function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
 {
@@ -19,7 +18,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
   let history = useHistory();
   function handleClick(e)
   {
-    // console.log(e.target.name)
     history.push(`/notes/create`);
   }
 
@@ -28,7 +26,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
     setCurrentChartMeasurement(e.target.value)
     console.log(e.target.value)
   }
-
 
   function handleFileUpload(url)
   {
@@ -39,7 +36,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
   {
     setAddDocument(!addDocument)
   }
-
 
   useEffect(function ()
   {
@@ -62,7 +58,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
     measurement_label: '',
   };
 
-  //create form state
   const [formState, setFormState] = useState(initialState);
   const handleChange = (e) =>
   {
@@ -91,7 +86,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
   {
     setTrialId(trial_id)
     history.push(`/trials/${trial_id}`);
-    // console.log(trial_id)
   }
   const sortedNotes = notes ? notes.sort((a, b) => new Date(b.date) - new Date(a.date)) : "";
   const mappedNotes = sortedNotes ? sortedNotes.map(function (note)
@@ -104,7 +98,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
       </tr>
     );
   }) : "";
-
 
   const mappedConditions = conditions ? conditions.map(function (condition)
   {
@@ -121,7 +114,6 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
       <td>{measurement.measurement_label}</td>
     </tr>
   });
-
 
   const data = measurements
     ? measurements.filter((measurement) => measurement.measurement_label === currentChartMeasurement)
@@ -211,17 +203,10 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
         <Card.Header><h6>Measurements</h6></Card.Header>
         <Card.Body>
           <div className='patient-chart-div'>
-
             <LineChart
               width={1000}
               height={400}
               data={data}
-            // margin={{
-            //     top: 5,
-            //     right: 5,
-            //     left: 30,
-            //     bottom: 5,
-            // }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
