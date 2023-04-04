@@ -43,7 +43,7 @@ function PatientsChart()
   ];
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="70%">
       <LineChart
         data={data}
         margin={{

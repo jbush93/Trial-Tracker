@@ -45,8 +45,8 @@ function TrialsChart({ trials })
   };
 
   return (
-    <div style={{ height: 250, paddingTop: 10, display: 'flex' }}>
-      <ResponsiveContainer width="100%" height="100%">
+    <div style={{ height: 250, display: 'flex' }}>
+      <ResponsiveContainer width="100%" height="70%">
         <PieChart>
           <Pie
             data={data}
