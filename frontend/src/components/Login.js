@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 function Login({ setLoggedIn, setUserId })
 {
   let initialState = {
-    email: '',
-    password: ''
+    email: '123@test.com',
+    password: 'password'
   }
   const [formState, setFormState] = useState(initialState);
   const handleChange = (e) =>
