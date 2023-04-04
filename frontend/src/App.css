@@ -198,7 +198,21 @@ a:hover {
 
 .myaccount {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   margin-left: 255px;
+  width: 85vw;
+  justify-content: center;
+}
+
+.my-account-header {
+  width: 80vw;
+  text-align: center;
+}
+
+.my-account-body {
+  width: 80vw;
+  text-align: center;
 }
 
 .trialsContainer {

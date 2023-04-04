@@ -60,14 +60,14 @@ function ChartTwo({ patient_measurements })
           { value: 'Male', type: 'circle', id: 'male-scatter', color: 'lightblue' },
           { value: 'Female', type: 'circle', id: 'female-scatter', color: 'pink' },
           { value: 'Male (Placebo)', type: 'circle', id: 'male-placebo-scatter', color: 'blue' },
-          { value: 'Female (Placebo)', type: 'circle', id: 'female-placebo-scatter', color: 'violet' },
+          { value: 'Female (Placebo)', type: 'circle', id: 'female-placebo-scatter', color: '#ec7171' },
         ]} />
         <Scatter data={formattedDataSorted} fill="#8884d8" >
           {
             formattedDataSorted ? formattedDataSorted.map((measurement) => (
               <Cell fill={
                 measurement.gender === 'Male' && measurement.placebo_group === true ? 'blue' :
-                  measurement.gender === 'Female' && measurement.placebo_group === true ? 'violet' :
+                  measurement.gender === 'Female' && measurement.placebo_group === true ? '#ec7171' :
                     measurement.gender === 'Male' ? 'lightblue' : 'pink'
               } />
             )) : ""

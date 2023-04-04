@@ -5,7 +5,6 @@ function CreateNote({ patientId, setNewNote })
 {
 
   let history = useHistory();
-  const [formState, setFormState] = useState(initialState);
 
   const initialState = {
     patient_id: patientId,
@@ -15,6 +14,7 @@ function CreateNote({ patientId, setNewNote })
   };
 
   //create form state
+  const [formState, setFormState] = useState(initialState);
   const handleChange = (e) =>
   {
     setFormState({ ...formState, [e.target.name]: e.target.value });

@@ -34,6 +34,7 @@ function App()
   const [deletedTrial, setDeletedTrial] = useState([]);
   const [deletedPatient, setDeletedPatient] = useState([]);
   const [userId, setUserId] = useState(0)
+  const [user, setUser] = useState([])
 
   console.log(patientId)
 
@@ -61,6 +62,7 @@ function App()
       .then(function (data)
       {
         console.log(data)
+        setUser(data)
       })
   }, [userId])
 
@@ -113,7 +115,7 @@ function App()
             </Route>
 
             <Route path='/myaccount'>
-              <MyAccount />
+              <MyAccount user={user} />
             </Route>
 
           </Switch>
