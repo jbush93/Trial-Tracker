@@ -315,7 +315,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
 
   return (
     <div className='trialsContainer'>
-      <Card style={{ minHeight: '50vh', width: '85vw' }}>
+      <Card style={{ minHeight: '50vh', width: '80vw' }}>
         <Card.Header
           className="d-flex justify-content-between align-items-center"
           style={{ color: 'black' }}
@@ -383,7 +383,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           }
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '30vh', width: '85vw' }}>
+      <Card style={{ minHeight: '30vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Aggregate Patient Measurements </h6>
         </Card.Header>
@@ -404,7 +404,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           </table>
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '25vh', width: '85vw' }}>
+      <Card style={{ minHeight: '25vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Patients </h6>
           <Button variant="primary" name="trials" onClick={handleAddPatient}>Add Patient</Button>
@@ -415,7 +415,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           </div>
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '30vh', width: '85vw' }}>
+      <Card style={{ minHeight: '30vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Conditions </h6>
           <Button variant="primary" name="trials" onClick={handleAddCondition}>Add Condition</Button>
@@ -430,7 +430,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           </div>
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '30vh', width: '85vw' }}>
+      <Card style={{ minHeight: '30vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Arm Groups </h6>
           <Button variant="primary" name="trials" onClick={handleAddGroup}>Add Arm Group</Button>
@@ -452,7 +452,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           </div>
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '30vh', width: '85vw' }}>
+      <Card style={{ minHeight: '30vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Locations</h6>
           <Button variant="primary" name="trials" onClick={handleAddLocation}>Add Location</Button>
@@ -486,7 +486,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
           </div>
         </Card.Body>
       </Card>
-      <Card style={{ minHeight: '30vh', width: '85vw' }}>
+      <Card style={{ minHeight: '30vh', width: '80vw' }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <h6>Outcomes</h6>
           <Button variant="primary" name="trials" onClick={handleAddOutcome}>Add Outcome</Button>

@@ -220,7 +220,7 @@ a:hover {
   margin-left: 255px;
   /* background: pink; */
   height: 98%;
-  width: 81vw;
+  min-width: 75vw;
   padding: 0.5em;
   /* margin: 25vh auto 0; */
 
