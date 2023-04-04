@@ -470,7 +470,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
               <input type="text" name="country" onChange={handleLocationChange} required />
               <button type='submit'>Add</button>
             </form> : ""}
-            <table className="table" style={{ width: "80vw" }}>
+            <table className="table" style={{ width: "75vw" }}>
               <thead>
                 <tr>
                   <th scope="col">Facility</th>
@@ -504,7 +504,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
               <input type="text" name="outcome_timeframe" onChange={handleOutcomeChange} required />
               <button type='submit'>Add</button>
             </form> : ""}
-            <table className="table" style={{ width: "80vw" }}>
+            <table className="table" style={{ width: "75vw" }}>
               <thead>
                 <tr>
                   <th scope="col">Description</th>
