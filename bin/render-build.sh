@@ -6,8 +6,8 @@ bundle install
 # clean
 rm -rf public
 # build
-npm install --prefix client && npm run build --prefix frontend
+npm install --prefix frontend && npm run build --prefix frontend
 # migrate
 bundle exec rake db:migrate
 # postbuild
-cp -a client/build/. public/
+cp -a frontend/build/. public/
