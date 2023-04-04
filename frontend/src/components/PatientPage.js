@@ -39,7 +39,7 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
 
   useEffect(function ()
   {
-    fetch(`http://localhost:3000/patients/${patientId}`)
+    fetch(`/patients/${patientId}`)
       .then(function (resp)
       {
         return resp.json()
