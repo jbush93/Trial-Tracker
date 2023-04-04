@@ -25,7 +25,7 @@ function Dashboard({ trials, notes })
 
   useEffect(() =>
   {
-    fetch('http://localhost:3000/events')
+    fetch('/events')
       .then(response => response.json())
       .then(data =>
       {
@@ -75,7 +75,7 @@ function Dashboard({ trials, notes })
       description,
     };
 
-    fetch('http://localhost:3000/events', {
+    fetch('/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

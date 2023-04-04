@@ -40,7 +40,7 @@ function CreateTrial({ setTrialId, trialId })
   {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/trials`, {
+    fetch(`/trials`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",

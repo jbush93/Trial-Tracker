@@ -40,7 +40,7 @@ function App()
 
   useEffect(function ()
   {
-    fetch("http://localhost:3000/trials")
+    fetch("/trials")
       .then(function (resp)
       {
         return resp.json()
@@ -54,7 +54,7 @@ function App()
 
   useEffect(function ()
   {
-    fetch(`http://localhost:3000/users/${userId}`)
+    fetch(`/users/${userId}`)
       .then(function (resp)
       {
         return resp.json()

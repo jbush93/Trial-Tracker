@@ -26,7 +26,7 @@ function CreatePatient({ setPatientId, patientId, trialId })
   {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/patients`, {
+    fetch(`/patients`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",

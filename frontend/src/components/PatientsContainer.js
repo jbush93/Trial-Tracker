@@ -29,7 +29,7 @@ function PatientsContainer({ setPatientId })
 
   const fetchPatients = () =>
   {
-    let url = `http://localhost:3000/patients?page=${page}`;
+    let url = `/patients?page=${page}`;
     if (searchQuery) {
       url += `&query=${searchQuery}`;
     }

@@ -10,7 +10,7 @@ function NotesContainer({ setNotes, notes, setPatientId, userId })
 
   useEffect(() =>
   {
-    fetch('http://localhost:3000/notes')
+    fetch('/notes')
       .then((resp) => resp.json())
       .then((data) =>
       {

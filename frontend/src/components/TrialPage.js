@@ -283,7 +283,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
 
   const handleConfirmDelete = () =>
   {
-    fetch(`http://localhost:3000/trials/${trialId}`, {
+    fetch(`/trials/${trialId}`, {
       method: 'DELETE',
       headers: {
         "content-type": "application/json",

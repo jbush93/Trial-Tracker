@@ -24,7 +24,7 @@ function CreateNote({ patientId, setNewNote })
   {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/notes`, {
+    fetch(`/notes`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",

@@ -69,7 +69,7 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
   {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/measurements`, {
+    fetch(`/measurements`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
@@ -154,7 +154,7 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
 
   const handleConfirmDelete = () =>
   {
-    fetch(`http://localhost:3000/patients/${patientId}`, {
+    fetch(`/patients/${patientId}`, {
       method: 'DELETE',
       headers: {
         "content-type": "application/json",
