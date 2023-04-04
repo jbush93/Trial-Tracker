@@ -57,12 +57,12 @@ function Login({ setLoggedIn, setUserId })
             >
               <input name="email" type="text"
                 required onChange={handleChange}
-                placeholder="email"
+                // placeholder="email"
                 value="123@test.com"
               />
               <input name="password" type="password"
                 required onChange={handleChange}
-                placeholder="password"
+                // placeholder="password"
                 value="password"
               />
               <button type="submit">Login</button>
