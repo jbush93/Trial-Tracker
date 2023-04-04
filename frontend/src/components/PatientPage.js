@@ -135,7 +135,7 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
       <div className='mapped-documents'>
         <h2>{document.title}</h2>
         {/* <embed src={document.pdf_url} width="800px" height="2100px" /> */}
-        <a href={document.pdf_url}>Link</a>
+        <a href={document.pdf_url} target="_blank" rel="noopener noreferrer">Link</a>
         <iframe src={document.pdf_url}></iframe>
       </div>
     )) : "";

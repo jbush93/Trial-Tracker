@@ -5,7 +5,7 @@ class PatientsController < ApplicationController
   def index
     if params[:query].present?
       # If a search query is provided, find all patients that match the query
-      patients = Patient.where("last_name LIKE ?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 6)
+      patients = Patient.where("last_name ILIKE ?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 6)
     else
       # Otherwise, return all patients
       patients = Patient.all.paginate(page: params[:page], per_page: 6)
