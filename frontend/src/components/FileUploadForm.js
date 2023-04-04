@@ -55,10 +55,11 @@ function FileUploadForm({ patientId, setPdfUrl, setAddDocument })
       </div>
       <div>
         <label htmlFor="file-input">Choose a file - pdf only:</label>
-        <input id="file-input" type="file" onChange={handleFileInputChange} />
+        <input id="file-input" type="file" accept=".pdf" onChange={handleFileInputChange} />
       </div>
       <button type="submit">Upload</button>
     </form>
+
   );
 }
 
