@@ -31,7 +31,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
 
   useEffect(function ()
   {
-    fetch(`http://localhost:3000/trials/${trialId}`)
+    fetch(`/trials/${trialId}`)
       .then(function (resp)
       {
         return resp.json()
@@ -100,7 +100,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   function handleConditionSubmit(e)
   {
     e.preventDefault()
-    fetch(`http://localhost:3000/conditions`, {
+    fetch(`/conditions`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
@@ -156,7 +156,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   function handleGroupSubmit(e)
   {
     e.preventDefault()
-    fetch(`http://localhost:3000/arm_groups`, {
+    fetch(`/arm_groups`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
@@ -170,7 +170,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   function handleLocationSubmit(e)
   {
     e.preventDefault()
-    fetch(`http://localhost:3000/locations`, {
+    fetch(`/locations`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
@@ -185,7 +185,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   function handleEditTrialSubmit(e)
   {
     e.preventDefault()
-    fetch(`http://localhost:3000/trials/${trialId}`, {
+    fetch(`/trials/${trialId}`, {
       method: 'PATCH',
       headers: {
         "content-type": "application/json",
@@ -218,7 +218,7 @@ function TrialPage({ trialId, setPatientId, setDeletedTrial, deletedPatient })
   function handleOutcomeSubmit(e)
   {
     e.preventDefault()
-    fetch(`http://localhost:3000/outcomes`, {
+    fetch(`/outcomes`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
