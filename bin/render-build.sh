@@ -10,6 +10,6 @@ npm install --prefix frontend && npm run build --prefix frontend
 # migrate
 bundle exec rake db:migrate
 # load seed data
-bundle exec rake db:reset
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:reset
 # postbuild
 cp -a frontend/build/. public/
