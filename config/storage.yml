@@ -9,11 +9,11 @@ local:
 google_dev:
   service: GCS
   project: trial-tracker-380902
-  credentials: 'config/gkey.json'
+  credentials: '/etc/secrets/gkey.json'
   bucket: trial-tracker-documents-bucket
 
 google:
   service: GCS
   project: trial-tracker-380902
-  credentials: 'config/gkey.json'
+  credentials: '/etc/secrets/gkey.json'
   bucket: trial-tracker-documents-bucket
