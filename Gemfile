@@ -49,4 +49,5 @@ gem 'activestorage'
 
 gem 'google-cloud-storage'
 
+gem 'pg'
 
