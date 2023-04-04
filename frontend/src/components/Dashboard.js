@@ -100,7 +100,7 @@ function Dashboard({ trials, notes })
     <div className="dashboard-container">
       <div className="row">
         <div className="col">
-          <Card style={{ minHeight: '40vh' }}>
+          <Card style={{ height: '40vh' }}>
             <Card.Header className="d-flex justify-content-between align-items-center">
               <h5>Trials</h5>
               <Button variant="primary" name="trials" onClick={handleClick}>
