@@ -228,9 +228,9 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
               <label for="date">Date: </label>
               <input type="date" id='date' name='date' onChange={handleChange}></input>
               <label for="measurement">Measurement Value: </label>
-              <input type="text" id='measurement' name='measurement' onChange={handleChange}></input>
+              <input type="text" id='measurement' name='measurement' onChange={handleChange} placeholder='EX. "125" (Must be numerical)'></input>
               <label for="measurement_label">Measurement Unit: </label>
-              <input type="text" id='measurement_label' name='measurement_label' onChange={handleChange}></input>
+              <input type="text" id='measurement_label' name='measurement_label' onChange={handleChange} placeholder='EX "lbs"'></input>
               <button type='submit'>Submit Measurement</button>
             </form>
             <table className="table">
