@@ -237,6 +237,7 @@ a:hover {
   justify-content: space-between;
   border-bottom: 1px solid black;
   height: 50px;
+  width: 80vw;
 }
 
 .form-container {
