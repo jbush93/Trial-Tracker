@@ -226,11 +226,11 @@ function PatientPage({ patientId, newNote, setTrialId, setDeletedPatient })
           <div>
             <form onSubmit={handleSubmit} id='measurement-form'>
               <label for="date">Date: </label>
-              <input type="date" id='date' name='date' onChange={handleChange}></input>
+              <input type="date" id='date' name='date' onChange={handleChange} required></input>
               <label for="measurement">Measurement Value: </label>
-              <input type="text" id='measurement' name='measurement' onChange={handleChange} placeholder='EX. "125" (Must be numerical)'></input>
+              <input type="text" id='measurement' name='measurement' onChange={handleChange} placeholder='EX. "125" (Must be numerical)' required></input>
               <label for="measurement_label">Measurement Unit: </label>
-              <input type="text" id='measurement_label' name='measurement_label' onChange={handleChange} placeholder='EX "lbs"'></input>
+              <input type="text" id='measurement_label' name='measurement_label' onChange={handleChange} placeholder='EX "lbs"' required></input>
               <button type='submit'>Submit Measurement</button>
             </form>
             <table className="table">
